@@ -1,12 +1,12 @@
-#leeftijd uitrekenen
+#age calculator
 
-geboortejaar=input("In welk jaar ben je geboren?: ")
+birthyear=input("In what year were you born?: ")
 
 import datetime
 
-aljarig=input("Ben je dit jaar al jarig geweest?: ")
-if aljarig.strip().lower()=="nee":
-    leeftijd=datetime.datetime.now().year-int(geboortejaar)-1
+hasaged=input("Have you already celebrated your birthday this year?: ")
+if hasaged.strip().lower()=="nee":
+    birthyear=datetime.datetime.now().year-int(birthyear)-1
 else:
-    leeftijd=datetime.datetime.now().year-int(geboortejaar)
-print("Je bent",leeftijd,"jaar oud.")
+    birthyear=datetime.datetime.now().year-int(birthyear)
+print("You are",birthyear,"Years old.")
