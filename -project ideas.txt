@@ -1,0 +1,5 @@
+project ideas:
+
+-make skyblock chance calculators(dyes,handle,etc)
+-
+ 
