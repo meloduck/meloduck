@@ -2,13 +2,20 @@
     #a handy thingy to calculate your dye chances
     #please note that most if not all of the drop chance information is pulled from The Official Hypixel Skyblock Wiki
 
-#to do
-    #input conditions of all dyes(affected by)
-    #input chances of all dyes
-    #add vincent buffs
-    #
 
-#dyeList
+
+#to do:
+    #input which dyes are affected by looting
+    #add vincent buffs
+    #make magic find functional
+    #make legion functional
+    #make looting functional
+    #make bucket of dye functional
+    #make farming fortune functional
+
+
+
+#all droppable dyes list
 dyes=[
     "aquamarine",
     "archfiend",
@@ -46,6 +53,21 @@ dyes=[
     "treasure",
     "wild strawberry"]
 
+#magic find affected list
+mfList=[
+    "aquamarine",
+    "bone",
+    "carmine",
+    "cyclamen",
+    "iceberg",
+    "midnight",
+    "pearlescent",
+    "periwinkle"]
+
+#farming fortune affected list
+ffList=[
+    "dung"]
+
 
 
 #input dye
@@ -58,20 +80,15 @@ while True:
 
 
 
-#is the dye affected by magic find?
+#is the dye affected by magic find (and looting)?
 magicfindaffected=False
-if dye=="carmine":
+if dye in mfList:
     magicfindaffected=True
 
 #is the dye affected by farming fortune?
 farmingfortuneaffected=False
-if dye=="dung":
+if dye in ffList:
     farmingfortuneaffected=True
-
-#is the dye affected by looting?
-lootingaffected=False 
-if dye=="pearlescent":
-    lootingaffected=True
 
 
 
@@ -115,8 +132,7 @@ if magicfindaffected==True:
         else:
             break
 
-#input looting level
-if lootingaffected==True:
+    #input looting level
     while True:
         lootinglevel=int(input("What level of looting do you have?: "))
         if lootinglevel<0:
@@ -144,12 +160,14 @@ if magicfindaffected==True:
 if farmingfortuneaffected==True:
     print(
         f"farming fortune: {farmingfortune}")
-if lootingaffected==True:
+if magicfindaffected==True:
     print(
         f"looting level: {lootinglevel}")
-print(f"bucket: {bucketofdye}\n")
+print(f"bucket: {bucketofdye}\n\n")
 
 
+
+#dye chance calculations
 
 #aquamarine
 aquamarinechance1=0.00002
@@ -364,8 +382,8 @@ icerbergchance3=0.002
 if dye=="icerberg":
     print("Chance for Icerberg Dye:\n\n"
         f"From:\nFrosty,\nFrozen Steve:\n{icerbergchance1}%\n\n"
-        f"From:\nGrinch,\nNutcracker:\n{icerbergchance2}%\n\n"
-        f"From:\nReindrake,\nYeti:{icerbergchance3}%\n")
+        f"From:\nNutcracker:\n{icerbergchance2}%\n\n"
+        f"From:\nYeti:{icerbergchance3}%\n")
 
 
 
