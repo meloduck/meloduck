@@ -5,8 +5,8 @@
 
 
 #to do:
-    #input which dyes are affected by looting
-    #add vincent buffs
+    #add fractions next to the chances
+    #make vincent buff functional
     #make magic find functional
     #make legion functional
     #make looting functional
@@ -80,6 +80,28 @@ while True:
 
 
 
+#input vincent boost
+boostamount=1
+while True:
+    boost=input("Is this Dye currently being boosted by Vincent (yes/no)?: ")
+    if boost=="yes":
+        while True:
+            boostamountinput=input("By how much (...x)?: ")
+            if boostamountinput=="3x":
+                boostamount=3
+                break
+            elif boostamountinput=="2x":
+                boostamount=2
+                break
+            else:
+                print("Invalid input!")
+    elif boost=="no":
+        break
+    else:
+        print("Invalid input!")
+
+
+
 #is the dye affected by magic find (and looting)?
 magicfindaffected=False
 if dye in mfList:
@@ -146,12 +168,15 @@ if magicfindaffected==True:
 while True:
     bucketofdye=input("Do you have a Bucket Of Dye (yes/no)?: ")
     if bucketofdye!="yes" and bucketofdye!="no":
-        print("Invalid input")
+        print("Please say 'yes' or 'no'!")
     else:
         break
 
 
 print(f"\ndye: {dye}")
+print(f"boosted: {boost}")
+if boost=="yes":
+    print(f"by: {boostamountinput}")
 if magicfindaffected==True:
     print(
         f"magic find: {magicfind}\n"
