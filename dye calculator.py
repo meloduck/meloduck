@@ -9,8 +9,9 @@
 
 #to do:
     #make legion functional
-    #make farming fortune functional
+    #make farming fortune functional(affected by crop fortune too!)()
     #make rng meter functional
+    #find out how weight works
 
 
 
@@ -169,18 +170,25 @@ if magicfindaffected==True:
             break
         elif magicfind<0:
             print("You can't have negative Magic Find!")
-mfmultiplier={1+magicfind/100}
+mfmultiplier=(1+magicfind/100)
 
 #input farming fortune
 farmingfortune=0
+cropfortune=0
 if farmingfortuneaffected==True:
     while True:
         farmingfortune=int(input("How much Farming Fortune do you have?: "))
         if farmingfortune>=0:
             break
-        elif magicfind<0:
+        elif farmingfortune<0:
             print("You can't have negative Farming Fortune!")
-ffmultiplier={1} #!!!!!!!!!!!!!
+        cocoafortune=int(input("How much Cocoa Beans Fortune do you have?: "))
+        if cocoafortune>=0:
+            break
+        elif cocoafortune<0:
+            print("You can't have negative Farming Fortune!")
+        #.......
+ffmultiplier=(1+(farmingfortune+cropfortune/600))
 
 #input legion level
 legionlevel=0
@@ -217,7 +225,7 @@ if magicfindaffected==True:
         else:
             break
 legionmultiplier={1} #!!!!!!!!!!!!!!!!
-lootingmultiplier={1+lootinglevel*0.15}
+lootingmultiplier=(1+lootinglevel*0.15)
 
 #input bucket of dye
 bucketmultiplier=1
@@ -255,10 +263,10 @@ print(f"bucket: {bucketofdye}\n\n")
 
 #dye chance calculations
 
-#aquamarine FINISHED?
-aquamarinechance1={0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-aquamarinechance2={0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-aquamarinechance3={0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+#aquamarine
+aquamarinechance1=(0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+aquamarinechance2=(0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+aquamarinechance3=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="aquamarine":
     print("Chance for Aquamarine Dye:\n"
@@ -269,8 +277,8 @@ if dye=="aquamarine":
 
 
 #archfiend
-archfiendchance1={0.015*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-archfiendchance2={0.15*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+archfiendchance1=(0.015*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+archfiendchance2=(0.15*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="archfiend":
     print("Chance for Archfiend Dye:\n"
@@ -279,8 +287,8 @@ if dye=="archfiend":
 
 
 
-#bone FINISHED?
-bonechance={0.0000333*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+#bone
+bonechance=(0.0000333*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="bone":
     print("Chance for Bone Dye:\n"
@@ -318,10 +326,10 @@ if dye=="byzantium":
 
 
 
-#carmine FINISHED?
-carminechance1={0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-carminechance2={0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-carminechance3={0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+#carmine
+carminechance1=(0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+carminechance2=(0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+carminechance3=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="carmine":
     print("Chance for Carmine Dye:\n"
@@ -332,8 +340,8 @@ if dye=="carmine":
 
 
 #celadon
-celadonchance1={0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-celadonchance2={0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+celadonchance1=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+celadonchance2=(0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="celadon":
     print("Chance for Celadon Dye:\n"
@@ -343,10 +351,10 @@ if dye=="celadon":
 
 
 #celeste
-celestechance1={0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-celestechance2={0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-celestechance3={0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-celestechance4={0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+celestechance1=(0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+celestechance2=(0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+celestechance3=(0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+celestechance4=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="celeste":
     print("Chance for Celeste Dye:\n"
@@ -358,11 +366,11 @@ if dye=="celeste":
 
 
 #copper
-copperchance1={0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-copperchance2={0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-copperchance3={0.004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-copperchance4={0.02*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-copperchance5={0.2*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+copperchance1=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+copperchance2=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+copperchance3=(0.004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+copperchance4=(0.02*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+copperchance5=(0.2*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="copper":
     print("Chance for Copper Dye:\n"
@@ -375,9 +383,9 @@ if dye=="copper":
 
 
 #cyclamen
-cyclamenchance1={0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-cyclamenchance2={0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-cyclamenchance3={0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+cyclamenchance1=(0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+cyclamenchance2=(0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+cyclamenchance3=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="cyclamen":
     print("Chance for Cyclamen Dye:\n\n"
@@ -388,7 +396,7 @@ if dye=="cyclamen":
 
 
 #dark purple
-darkpurplechance={0.748*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+darkpurplechance=(0.748*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="dark purple":
     print("Chance for Dark Purple Dye:\n"
@@ -396,8 +404,8 @@ if dye=="dark purple":
 
 
 
-#dung
-dungchance={0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+#dung !!!!!!!!!!!!!!!!!!!!!
+dungchance=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*ffmultiplier)
 
 if dye=="dung":
     print("Chance for Dung Dye:\n"
@@ -406,7 +414,7 @@ if dye=="dung":
 
 
 #emerald
-emeraldchance={0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+emeraldchance=(0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="emnerald":
     print("Chance for Emerald Dye:\n"
@@ -415,10 +423,10 @@ if dye=="emnerald":
 
 
 #flame
-flamechance1={0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-flamechance2={0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-flamechance3={0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-flamechance4={0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+flamechance1=(0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+flamechance2=(0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+flamechance3=(0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+flamechance4=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="flame":
     print("Chance for Flame Dye:\n"
@@ -430,7 +438,7 @@ if dye=="flame":
 
 
 #fossil
-fossilchance={0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+fossilchance=(0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="fossil":
     print("Chance for Fossil Dye to appear:\n"
@@ -439,9 +447,9 @@ if dye=="fossil":
 
 
 #frostbitten
-frostbittenchance1={0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-frostbittenchance2={0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-frostbittenchance3={0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+frostbittenchance1=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+frostbittenchance2=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+frostbittenchance3=(0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="frostbitten":
     print("Chance for Frostbitten Dye:\n"
@@ -452,7 +460,7 @@ if dye=="frostbitten":
 
 
 #holly
-hollychance={0.00125*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+hollychance=(0.00125*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="holly":
     print("Chance for Holly Dye:\n"
@@ -461,9 +469,9 @@ if dye=="holly":
 
 
 #iceberg
-icerbergchance1={0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-icerbergchance2={0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-icerbergchance3={0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+icerbergchance1=(0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+icerbergchance2=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+icerbergchance3=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="icerberg":
     print("Chance for Icerberg Dye:\n\n"
@@ -474,7 +482,7 @@ if dye=="icerberg":
 
 
 #jade
-jadechance={0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+jadechance=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="jade":
     print("Chance for Jade Dye:\n"
@@ -483,7 +491,7 @@ if dye=="jade":
 
 
 #livid
-lividchance={0.02*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+lividchance=(0.02*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="livid":
     print("Chance for Livid Dye:\n"
@@ -492,7 +500,7 @@ if dye=="livid":
 
 
 #mango
-mangochance={0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+mangochance=(0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="mango":
     print("Chance for Mango Dye:\n"
@@ -501,11 +509,11 @@ if dye=="mango":
 
 
 #matcha
-matchachance1={0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-matchachance2={0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-matchachance3={0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-matchachance4={0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-matchachance5={0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+matchachance1=(0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+matchachance2=(0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+matchachance3=(0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+matchachance4=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+matchachance5=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="matcha":
     print("Chance for Matcha Dye:\n"
@@ -518,9 +526,9 @@ if dye=="matcha":
 
 
 #midnight
-midnightchance1={0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-midnightchance2={0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-midnightchance3={0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+midnightchance1=(0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+midnightchance2=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+midnightchance3=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="midnight":
     print("Chance for Midnight Dye:\n\n"
@@ -531,14 +539,14 @@ if dye=="midnight":
 
 
 #mocha
-mochachance1={0.000001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-mochachance2={0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-mochachance3={0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-mochachance4={0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-mochachance5={0.00013*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-mochachance6={0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-mochachance7={0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-mochachance8={0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+mochachance1=(0.000001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+mochachance2=(0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+mochachance3=(0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+mochachance4=(0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+mochachance5=(0.00013*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+mochachance6=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+mochachance7=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+mochachance8=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="mocha":
     print("Chance for Mocha Dye:\n"
@@ -554,9 +562,9 @@ if dye=="mocha":
 
 
 #nadeshiko
-nadeshikochance1={0.00133*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-nadeshikochance2={0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-nadeshikochance3={0.004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+nadeshikochance1=(0.00133*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+nadeshikochance2=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+nadeshikochance3=(0.004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="nadeshiko":
     print("Chance for Nadeshiko Dye to appear:\n"
@@ -567,7 +575,7 @@ if dye=="nadeshiko":
 
 
 #necron
-necronchance={0.04*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+necronchance=(0.04*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="necron":
     print("Chance for Necron Dye:\n"
@@ -576,7 +584,7 @@ if dye=="necron":
 
 
 #nyanza
-nyanzachance={0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+nyanzachance=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="nyanza":
     print("Chance for Nyanza Dye:\n"
@@ -585,10 +593,10 @@ if dye=="nyanza":
 
 
 #pearlescent
-pearlescentchance1={0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-pearlescentchance2={0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-pearlescentchance3={0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-pearlescentchance4={0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+pearlescentchance1=(0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+pearlescentchance2=(0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+pearlescentchance3=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+pearlescentchance4=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="pearlescent":
     print("Chance for Pearlescent Dye:\n\n"
@@ -600,11 +608,11 @@ if dye=="pearlescent":
 
 
 #pelt
-peltchance1={0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-peltchance2={0.0005*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-peltchance3={0.000667*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-peltchance4={0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-peltchance5={0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+peltchance1=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+peltchance2=(0.0005*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+peltchance3=(0.000667*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+peltchance4=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+peltchance5=(0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="pelt":
     print("Chance for Pelt Dye:\n"
@@ -617,11 +625,11 @@ if dye=="pelt":
 
 
 #periwinkle
-periwinklechance1={0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-periwinklechance2={0.00025*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-periwinklechance3={0.000333*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-periwinklechance4={0.0005*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-periwinklechance5={0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+periwinklechance1=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+periwinklechance2=(0.00025*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+periwinklechance3=(0.000333*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+periwinklechance4=(0.0005*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+periwinklechance5=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="periwinkle":
     print("Chance for Periwinkle Dye:\n"
@@ -634,11 +642,11 @@ if dye=="periwinkle":
 
 
 #sangria
-sangriachance1={0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-sangriachance2={0.00125*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-sangriachance3={0.00167*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-sangriachance4={0.0025*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-sangriachance5={0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+sangriachance1=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+sangriachance2=(0.00125*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+sangriachance3=(0.00167*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+sangriachance4=(0.0025*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+sangriachance5=(0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="sangria":
     print("Chance for Sangria Dye:\n"
@@ -651,7 +659,7 @@ if dye=="sangria":
 
 
 #secret
-secretchance={0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+secretchance=(0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="secret":
     print("Chance for Secret Dye:\n"
@@ -660,11 +668,11 @@ if dye=="secret":
 
 
 #tentacle
-tentaclechance1={0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-tentaclechance2={0.00125*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-tentaclechance3={0.00167*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-tentaclechance4={0.0025*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-tentaclechance5={0.005*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+tentaclechance1=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+tentaclechance2=(0.00125*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+tentaclechance3=(0.00167*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+tentaclechance4=(0.0025*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+tentaclechance5=(0.005*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="tentactle":
     print("Chance for Tentacle Dye:\n"
@@ -677,9 +685,9 @@ if dye=="tentactle":
 
 
 #treasure
-treasurechance1={0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-treasurechance2={0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
-treasurechance3={0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+treasurechance1=(0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+treasurechance2=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+treasurechance3=(0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="treasure":
     print("Chance for Treasure Dye:\n"
@@ -690,7 +698,7 @@ if dye=="treasure":
 
 
 #wild strawberry
-wildstrawberrychance={0.000000667*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier*ffmultiplier}
+wildstrawberrychance=(0.000000667*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="wild strawberry":
     print("Chance for Wild Strawberry Dye:\n"
