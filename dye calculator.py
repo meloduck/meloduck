@@ -1,5 +1,5 @@
 #dye calculator
-    #a handy thingy to calculate your dye chances
+    #a handy thingy to calculate your dye chances(and maybe estimated time required to drop one in the future)
     #info is mainly pulled from The Official Hypixel Skyblock Wiki and the (unofficial) Hypixel Skyblock Dyes discord server
     #please note that very little is known about how the various items/stats that affect the chance of dye drops work exactly, due to this anything that comes out of this calculator could not be true
     #this calculator is now relatively close to being finished
@@ -8,11 +8,10 @@
 
 #to do:
     #make legion functional
-    #make farming fortune functional(affected by crop fortune too!)
     #make rng meter functional
-    #find out how weight works
-    #finish fossil dye
     #make fossil dye part a little more optimized
+    #add time estimates to all dyes maybe
+    #fix integer inputs
 
 
 
@@ -149,6 +148,21 @@ while True:
 
 
 
+#input bucket of dye
+bucketmultiplier=1
+while True:
+    bucketofdye=input("Do you have a Bucket Of Dye? (Yes/No): ")
+    bucketofdye=bucketofdye.lower()
+    if bucketofdye=="yes":
+        bucketmultiplier=1.01
+        break
+    elif bucketofdye=="no":
+        break
+    else:
+        print("Please say 'yes' or 'no'!")
+
+
+
 #is the dye affected by magic find (and looting)?
 magicfindaffected=False
 if dye in mfList:
@@ -179,21 +193,116 @@ mfmultiplier=(1+magicfind/100)
 
 #input farming fortune
 farmingfortune=0
-cropfortune=0
+cactusfortune=0
+carrotfortune=0
+cocoabeansfortune=0
+melonfortune=0
+mushroomfortune=0
+netherwartfortune=0
+potatofortune=0
+pumpkinfortune=0
+sugarcanefortune=0
+wheatfortune=0
 if farmingfortuneaffected==True:
     while True:
-        farmingfortune=int(input("How much Farming Fortune do you have?: "))
+        farmingfortune=int(input("How much Farming Fortune do you have? (With Vacuum equipped!): "))
         if farmingfortune>=0:
             break
         elif farmingfortune<0:
             print("You can't have negative Farming Fortune!")
-        cocoafortune=int(input("How much Cocoa Beans Fortune do you have?: "))
-        if cocoafortune>=0:
+    #input crop fortune
+    #cactus
+    while True:
+        cactusfortune=int(input("How much Cactus Fortune do you have? (With Vacuum equipped!): "))
+        if cactusfortune>=0:
             break
-        elif cocoafortune<0:
-            print("You can't have negative Farming Fortune!")
-        #.......
-ffmultiplier=(1+(farmingfortune+cropfortune/600))
+        elif cactusfortune<0:
+            print("You can't have negative Cactus Fortune!")
+        else:
+            print("Invalid input!")
+    #carrot
+    while True:
+        carrotfortune=int(input("How much Carrot Fortune do you have? (With Vacuum equipped!): "))
+        if carrotfortune>=0:
+            break
+        elif carrotfortune<0:
+            print("You can't have negative Carrot Fortune!")
+        else:
+            print("Invalid input!")
+    #cocoabeans
+    while True:
+        cocoabeansfortune=int(input("How much Cocoa Beans Fortune do you have? (With Vacuum equipped!): "))
+        if cocoabeansfortune>=0:
+            break
+        elif cocoabeansfortune<0:
+            print("You can't have negative Cocoa Beans Fortune!")
+        else:
+            print("Invalid input!")
+    #melon
+    while True:
+        melonfortune=int(input("How much Melon Fortune do you have? (With Vacuum equipped!): "))
+        if melonfortune>=0:
+            break
+        elif melonfortune<0:
+            print("You can't have negative Melon Fortune!")
+        else:
+            print("Invalid input!")
+    #mushroom
+    while True:
+        mushroomfortune=int(input("How much Mushroom Fortune do you have? (With Vacuum equipped!): "))
+        if mushroomfortune>=0:
+            break
+        elif mushroomfortune<0:
+            print("You can't have negative Mushroom Fortune!")
+        else:
+            print("Invalid input!")
+    #nether wart
+    while True:
+        netherwartfortune=int(input("How much Nether Wart Fortune do you have? (With Vacuum equipped!): "))
+        if netherwartfortune>=0:
+            break
+        elif netherwartfortune<0:
+            print("You can't have negative Nether Wart Fortune!")
+        else:
+            print("Invalid input!")
+    #potato
+    while True:
+        potatofortune=int(input("How much Potato Fortune do you have? (With Vacuum equipped!): "))
+        if potatofortune>=0:
+            break
+        elif potatofortune<0:
+            print("You can't have negative Potato Fortune!")
+        else:
+            print("Invalid input!")
+    #pumpkin
+    while True:
+        pumpkinfortune=int(input("How much Pumpkin Fortune do you have? (With Vacuum equipped!): "))
+        if pumpkinfortune>=0:
+            break
+        elif pumpkinfortune<0:
+            print("You can't have negative Pumpkin Fortune!")
+        else:
+            print("Invalid input!")
+    #sugar cane
+    while True:
+        sugarcanefortune=int(input("How much Sugar Cane Fortune do you have? (With Vacuum equipped!): "))
+        if sugarcanefortune>=0:
+            break
+        elif sugarcanefortune<0:
+            print("You can't have negative Sugar Cane Fortune!")
+        else:
+            print("Invalid input!")
+    #wheat
+    while True:
+        wheatfortune=int(input("How much Wheat Fortune do you have? (With Vacuum equipped!): "))
+        if wheatfortune>=0:
+            break
+        elif wheatfortune<0:
+            print("You can't have negative Wheat Fortune!")
+        else:
+            print("Invalid input!")
+
+
 
 #input legion level
 legionlevel=0
@@ -222,7 +331,7 @@ if magicfindaffected==True:
 
     #input looting level
     while True:
-        lootinglevel=int(input("What level of looting do you have?: "))
+        lootinglevel=int(input("What level of Looting do you have?: "))
         if lootinglevel<0:
             print("You can't have a negative level of Looting!")
         elif lootinglevel>5:
@@ -232,25 +341,15 @@ if magicfindaffected==True:
 legionmultiplier={1} #!!!!!!!!!!!!!!!!
 lootingmultiplier=(1+lootinglevel*0.15)
 
-#input bucket of dye
-bucketmultiplier=1
-while True:
-    bucketofdye=input("Do you have a Bucket Of Dye? (Yes/No): ")
-    bucketofdye=bucketofdye.lower()
-    if bucketofdye=="yes":
-        bucketmultiplier=1.01
-        break
-    elif bucketofdye=="no":
-        break
-    else:
-        print("Please say 'yes' or 'no'!")
-
 
 
 #fossil dye inputs
+chiselcharges=0
+aquamarinemultiplier=0
+citrinemultiplier=0
+onyxmultiplier=0
+fungloommultiplier=0
 if dye=="fossil":
-    chiselcharges=1
-
     #tier of chisel
     while True:
         chisel=input("What tier of Chisel do you have?(From t1 to t4: Chisel, Reinforced Chisel, Glacite-Plated Chisel, Perfect Chisel): ")
@@ -274,9 +373,6 @@ if dye=="fossil":
             print("Invalid input!")
 
     #type and tier of gemstone
-    aquamarinemultiplier=0
-    citrinemultiplier=0
-    onyxmultiplier=0
     while True:
         #tier 1 chisel
         if chisel=="chisel" or chisel=="t1" or chisel=="1":
@@ -689,7 +785,6 @@ if dye=="fossil":
         break
 
     #fungloom shard
-    fungloommultiplier=0
     while True:
         fungloom=input("What level is your Fungloom attribute?: ")
         if fungloom=="0":
@@ -763,7 +858,7 @@ if magicfindaffected==True:
         f"legion level: {legionlevel}\n"
         f"legion amount: {legionamount}")
 if farmingfortuneaffected==True:
-    print(f"farming fortune: {farmingfortune}")
+    print(f"\nfarming fortune: {farmingfortune}")
 if magicfindaffected==True:
     print(f"looting level: {lootinglevel}")
 
@@ -777,10 +872,10 @@ aquamarinechance2=(0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*loot
 aquamarinechance3=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="aquamarine":
-    print("Chance for Aquamarine Dye:\n"
-        f"From Common/Uncommon Water Sea Creatures: {aquamarinechance1}% or 1/{100//aquamarinechance1+1}\n"
-        f"From Rare/Epic Water Sea Creatures: {aquamarinechance2}% or 1/{100//aquamarinechance2+1}\n"
-        f"From Legendary/Mythic Water Sea Creatures: {aquamarinechance3}% or 1/{100//aquamarinechance3+1}\n")
+    print("\nChance for Aquamarine Dye:\n"
+        f"From Common/Uncommon Water Sea Creatures:     {aquamarinechance1}% or 1/{100//aquamarinechance1+1}\n"
+        f"From Rare/Epic Water Sea Creatures:           {aquamarinechance2}% or 1/{100//aquamarinechance2+1}\n"
+        f"From Legendary/Mythic Water Sea Creatures:    {aquamarinechance3}% or 1/{100//aquamarinechance3+1}\n")
 
 
 
@@ -789,9 +884,9 @@ archfiendchance1=(0.015*rngmultiplier*bucketmultiplier*vincentmultiplier*looting
 archfiendchance2=(0.15*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="archfiend":
-    print("Chance for Archfiend Dye:\n"
-        f"From Archfiend Dice: {archfiendchance1}% or 1/{100//archfiendchance1+1}\n"
-        f"From High Class Archfiend Dice: {archfiendchance2}% or 1/{100//archfiendchance2+1}\n")
+    print("\nChance for Archfiend Dye:\n"
+        f"From Archfiend Dice:              {archfiendchance1}% or 1/{100//archfiendchance1+1}\n"
+        f"From High Class Archfiend Dice:   {archfiendchance2}% or 1/{100//archfiendchance2+1}\n")
 
 
 
@@ -799,8 +894,8 @@ if dye=="archfiend":
 bonechance=(0.0000333*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="bone":
-    print("Chance for Bone Dye:\n"
-          f"From any skeletal mob: {bonechance}% or 1/{100//bonechance+1}\n")
+    print("\nChance for Bone Dye:\n"
+        f"From any skeletal mob: {bonechance}% or 1/{100//bonechance+1}\n")
 
 
 
@@ -811,7 +906,7 @@ brickredchance3=0.0001
 brickredchance4=0.0002
 
 if dye=="brick red":
-    print("Chance for Brick Red Dye:\n"
+    print("\nChance for Brick Red Dye:\n"
           f"From Tier 1 Tarantula Broodfather: {brickredchance1}% or 1/{100//brickredchance1+1}\n"
           f"From Tier 2 Tarantula Broodfather: {brickredchance2}% or 1/{100//brickredchance2+1}\n"
           f"From Tier 3 Tarantula Broodfather: {brickredchance3}% or 1/{100//brickredchance3+1}\n"
@@ -826,7 +921,7 @@ byzantiumchance3=0.0001
 byzantiumchance4=0.0002
 
 if dye=="byzantium":
-    print("Chance for Byzantium Dye:\n"
+    print("\nChance for Byzantium Dye:\n"
         f"From Tier 1 Voidgloom Seraph: {byzantiumchance1}% or 1/{100//byzantiumchance1+1}\n"
         f"From Tier 2 Voidgloom Seraph: {byzantiumchance2}% or 1/{100//byzantiumchance2+1}\n"
         f"From Tier 3 Voidgloom Seraph: {byzantiumchance3}% or 1/{100//byzantiumchance3+1}\n"
@@ -840,10 +935,10 @@ carminechance2=(0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*looting
 carminechance3=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="carmine":
-    print("Chance for Carmine Dye:\n"
-          f"From Common/Uncommon Lava Sea Creatures: {carminechance1}% or 1/{100//carminechance1+1}\n"
-          f"From Rare/Epic Lava Sea Creatures: {carminechance2}% or 1/{100//carminechance2+1}\n"
-          f"From Legendary/Mythic Lava Sea Creatures: {carminechance3}% or 1/{100//carminechance3+1}\n")
+    print("\nChance for Carmine Dye:\n"
+          f"From Common/Uncommon Lava Sea Creatures:    {carminechance1}% or 1/{100//carminechance1+1}\n"
+          f"From Rare/Epic Lava Sea Creatures:          {carminechance2}% or 1/{100//carminechance2+1}\n"
+          f"From Legendary/Mythic Lava Sea Creatures:   {carminechance3}% or 1/{100//carminechance3+1}\n")
 
 
 
@@ -852,9 +947,9 @@ celadonchance1=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmu
 celadonchance2=(0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="celadon":
-    print("Chance for Celadon Dye:\n"
-          f"From Blobbercyst: {celadonchance1}% or 1/{100//celadonchance1+1}\n"
-          f"From Bacte: {celadonchance2}% or 1/{100//celadonchance2+1}\n")
+    print("\nChance for Celadon Dye:\n"
+          f"From Blobbercyst:   {celadonchance1}% or 1/{100//celadonchance1+1}\n"
+          f"From Bacte:         {celadonchance2}% or 1/{100//celadonchance2+1}\n")
 
 
 
@@ -865,7 +960,7 @@ celestechance3=(0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingm
 celestechance4=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="celeste":
-    print("Chance for Celeste Dye:\n"
+    print("\nChance for Celeste Dye:\n"
         f"From Tier 1 Sven Packmaster: {celestechance1}% or 1/{100//celestechance1+1}\n"
         f"From Tier 2 Sven Packmaster: {celestechance2}% or 1/{100//celestechance2+1}\n"
         f"From Tier 3 Sven Packmaster: {celestechance3}% or 1/{100//celestechance3+1}\n"
@@ -881,12 +976,12 @@ copperchance4=(0.02*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmult
 copperchance5=(0.2*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="copper":
-    print("Chance for Copper Dye:\n"
-          f"From Uncommon Visitor: {copperchance1}% or 1/{100//copperchance1+1}\n"
-          f"From Rare Visitor: {copperchance2}% or 1/{100//copperchance2+1}\n"
+    print("\nChance for Copper Dye:\n"
+          f"From Uncommon Visitor:  {copperchance1}% or 1/{100//copperchance1+1}\n"
+          f"From Rare Visitor:      {copperchance2}% or 1/{100//copperchance2+1}\n"
           f"From Legendary Visitor: {copperchance3}% or 1/{100//copperchance3+1}\n"
-          f"From Mythic Visitor: {copperchance4}% or 1/{100//copperchance4+1}\n"
-          f"From Special Visitor: {copperchance5}% or 1/{100//copperchance5+1}\n")
+          f"From Mythic Visitor:    {copperchance4}% or 1/{100//copperchance4+1}\n"
+          f"From Special Visitor:   {copperchance5}% or 1/{100//copperchance5+1}\n")
 
 
 
@@ -896,7 +991,7 @@ cyclamenchance2=(0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootin
 cyclamenchance3=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="cyclamen":
-    print("Chance for Cyclamen Dye:\n\n"
+    print("\nChance for Cyclamen Dye:\n\n"
         f"From:\nBezal,/nBlaze,\nFlaming Spider,\nFlare,\nKada Knight,\nMagma Cube,\nMagma Cube Rider,\nMushroom Bull,\nMutated Blaze,\nWither Skeleton,\nWither Spectre:\n{cyclamenchance1}% or 1/{100//cyclamenchance1+1}\n\n"
         f"From:\nBarbarian,\nBarbarian Gaurd,\nDive Ghast,\nFire Mage,\nGhast,\nGoliath Barbarian,\nKrondor Necromancer,\nMage Gaurd,\nMagma Glare,\nMatcho,\nMillenia-Aged Blaze,\nSmoldering Blaze,\nUnstable Magma:\n{cyclamenchance2}% or 1/{100//cyclamenchance2+1}\n\n"
         f"From:\nAshfang,\nBarbarian Duke X,\nBladesoul,\nCinderbat,\nHellwisp,\nMage Outlaw,\nMagma Boss,\nVanquisher:\n{cyclamenchance3}% or 1/{100//cyclamenchance3+1}\n")
@@ -907,25 +1002,45 @@ if dye=="cyclamen":
 darkpurplechance=(0.748*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="dark purple":
-    print("Chance for Dark Purple Dye:\n"
+    print("\nChance for Dark Purple Dye:\n"
         f"To appear in a Dark(er) Auction lobby: {darkpurplechance}% or 1/{100//darkpurplechance+1}\n")
 
 
 
 #dung
-dungchance=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*ffmultiplier)
+dungchancebeetle=(0.0002*bucketmultiplier*vincentmultiplier*(1+(farmingfortune+netherwartfortune)/600))
+dungchancecricket=(0.0002*bucketmultiplier*vincentmultiplier*(1+(farmingfortune+carrotfortune)/600))
+dungchanceearthworm=(0.0002*bucketmultiplier*vincentmultiplier*(1+(farmingfortune+melonfortune)/600))
+dungchancefieldmouse=(0.001*bucketmultiplier*vincentmultiplier*(1+farmingfortune/600))
+dungchancefly=(0.0002*bucketmultiplier*vincentmultiplier*(1+(farmingfortune+wheatfortune)/600))
+dungchancelocust=(0.0002*bucketmultiplier*vincentmultiplier*(1+(farmingfortune+potatofortune)/600))
+dungchancemite=(0.0002*bucketmultiplier*vincentmultiplier*(1+(farmingfortune+cactusfortune)/600))
+dungchancemosquito=(0.0002*bucketmultiplier*vincentmultiplier*(1+(farmingfortune+sugarcanefortune)/600))
+dungchancemoth=(0.0002*bucketmultiplier*vincentmultiplier*(1+(farmingfortune+cocoabeansfortune)/600))
+dungchancerat=(0.0002*bucketmultiplier*vincentmultiplier*(1+(farmingfortune+pumpkinfortune)/600))
+dungchanceslug=(0.0002*bucketmultiplier*vincentmultiplier*(1+(farmingfortune+mushroomfortune)/600))
 
 if dye=="dung":
-    print("Chance for Dung Dye:\n"
-        f"From any Pest: {dungchance}% or 1/{100//dungchance+1}")
+    print("\nChance for Dung Dye:\n"
+        f"From a Beetle:        {dungchancebeetle}% or 1/{100//dungchancebeetle+1}\n"
+        f"From a Cricket:       {dungchancecricket}% or 1/{100//dungchancecricket+1}\n"
+        f"From an Earthworm:    {dungchanceearthworm}% or 1/{100//dungchanceearthworm+1}\n"
+        f"From a Field Mouse:   {dungchancefieldmouse}% or 1/{100//dungchancefieldmouse+1}\n"
+        f"From a Fly:           {dungchancefly}% or 1/{100//dungchancefly+1}\n"
+        f"From a Locust:        {dungchancelocust}% or 1/{100//dungchancelocust+1}\n"
+        f"From a Mite:          {dungchancemite}% or 1/{100//dungchancemite+1}\n"
+        f"From a Mosquito:      {dungchancemosquito}% or 1/{100//dungchancemosquito+1}\n"
+        f"From a Moth:          {dungchancemoth}% or 1/{100//dungchancemoth+1}\n"
+        f"From a Rat:           {dungchancerat}% or 1/{100//dungchancerat+1}\n"
+        f"From a Slug:          {dungchanceslug}% or 1/{100//dungchanceslug+1}\n")
 
 
 
 #emerald
 emeraldchance=(0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
-if dye=="emnerald":
-    print("Chance for Emerald Dye:\n"
+if dye=="emerald":
+    print("\nChance for Emerald Dye:\n"
         f"Per Emerald (Ore) broken: {emeraldchance}% or 1/{100//emeraldchance+1}\n")
 
 
@@ -937,7 +1052,7 @@ flamechance3=(0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmul
 flamechance4=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="flame":
-    print("Chance for Flame Dye:\n"
+    print("\nChance for Flame Dye:\n"
         f"From Tier 1 Inferno Demonlord: {flamechance1}% or 1/{100//flamechance1+1}\n"
         f"From Tier 2 Inferno Demonlord: {flamechance2}% or 1/{100//flamechance2+1}\n"
         f"From Tier 3 Inferno Demonlord: {flamechance3}% or 1/{100//flamechance3+1}\n"
@@ -954,9 +1069,9 @@ fossilchance=(0.0002*bucketmultiplier*vincentmultiplier)
 fossilchanceperscrap=(0.0002*bucketmultiplier*vincentmultiplier*treasures*((chiselcharges-highlightedtreasures)/(54-highlightedtreasures)))
 
 if dye=="fossil":
-    print("Chance for Fossil Dye:\n"
-        f"To replace any Treasure in Fossil Excavator: {fossilchance}% or 1/{100//fossilchance+1}\n"
-        f"To BE OBTAINED per scrap: {fossilchanceperscrap}% or 1/{100//fossilchanceperscrap+1}\n")
+    print("\nChance for Fossil Dye:\n"
+        f"To replace any Treasure in Fossil Excavator:  {fossilchance}% or 1/{100//fossilchance+1}\n"
+        f"To BE OBTAINED per scrap:                     {fossilchanceperscrap}% or 1/{100//fossilchanceperscrap+1}\n")
 
 
 
@@ -966,10 +1081,10 @@ frostbittenchance2=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*looti
 frostbittenchance3=(0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="frostbitten":
-    print("Chance for Frostbitten Dye:\n"
-        f"From Lapis Corpse: {frostbittenchance1}% or 1/{100//frostbittenchance1+1}\n"
-        f"From Umber/Tungsten Corpse: {frostbittenchance2}% or 1/{100//frostbittenchance2+1}\n"
-        f"From Vangaurd Corpse: {frostbittenchance3}% or 1/{100//frostbittenchance3+1}\n")
+    print("\nChance for Frostbitten Dye:\n"
+        f"From Lapis Corpse:            {frostbittenchance1}% or 1/{100//frostbittenchance1+1}\n"
+        f"From Umber/Tungsten Corpse:   {frostbittenchance2}% or 1/{100//frostbittenchance2+1}\n"
+        f"From Vangaurd Corpse:         {frostbittenchance3}% or 1/{100//frostbittenchance3+1}\n")
 
 
 
@@ -977,7 +1092,7 @@ if dye=="frostbitten":
 hollychance=(0.00125*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="holly":
-    print("Chance for Holly Dye:\n"
+    print("\nChance for Holly Dye:\n"
         f"From Red Gift: {hollychance}% or 1/{100//hollychance+1}\n")
 
 
@@ -988,7 +1103,7 @@ icerbergchance2=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*looting
 icerbergchance3=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="icerberg":
-    print("Chance for Icerberg Dye:\n\n"
+    print("\nChance for Icerberg Dye:\n\n"
         f"From:\nFrosty,\nFrozen Steve:\n{icerbergchance1}% or 1/{100//icerbergchance1+1}\n\n"
         f"From:\nNutcracker:\n{icerbergchance2}% or 1/{100//icerbergchance2+1}\n\n"
         f"From:\nYeti:{icerbergchance3}% or 1/{100//icerbergchance3+1}\n")
@@ -999,7 +1114,7 @@ if dye=="icerberg":
 jadechance=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="jade":
-    print("Chance for Jade Dye:\n"
+    print("\nChance for Jade Dye:\n"
         f"Per item roll in a Crystal Nucleus Bundle: {jadechance}% or 1/{100//jadechance+1}\n")
 
 
@@ -1008,7 +1123,7 @@ if dye=="jade":
 lividchance=(0.02*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="livid":
-    print("Chance for Livid Dye:\n"
+    print("\nChance for Livid Dye:\n"
         f"From Bedrock Chest in Master Catacombs Floor V {lividchance}% or 1/{100//lividchance+1}\n")
 
 
@@ -1017,7 +1132,7 @@ if dye=="livid":
 mangochance=(0.00001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="mango":
-    print("Chance for Mango Dye:\n"
+    print("\nChance for Mango Dye:\n"
           f"From breaking any log: {mangochance}% or 1/{100//mangochance+1}\n")
 
 
@@ -1030,7 +1145,7 @@ matchachance4=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmu
 matchachance5=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="matcha":
-    print("Chance for Matcha Dye:\n"
+    print("\nChance for Matcha Dye:\n"
         f"From Tier 1 Revenant Horror: {matchachance1}% or 1/{100//matchachance1+1}\n"
         f"From Tier 2 Revenant Horror: {matchachance2}% or 1/{100//matchachance2+1}\n"
         f"From Tier 3 Revenant Horror: {matchachance3}% or 1/{100//matchachance3+1}\n"
@@ -1045,7 +1160,7 @@ midnightchance2=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier*looting
 midnightchance3=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="midnight":
-    print("Chance for Midnight Dye:\n\n"
+    print("\nChance for Midnight Dye:\n\n"
         f"From:\nCrazy Witch,\nPhantom Spirit,\nScary Jerry,\nTrick or Treater,\nWither Gourd,\nWraith:\n{midnightchance1}% or 1/{100//midnightchance1+1}\n\n"
         f"From:\nNightmare,\nScarecrow,\nWerewolf:\n{midnightchance2}% or 1/{100//midnightchance2+1}\n\n"
         f"From:\nGrim Reaper,\nHeadless Horseman,\nPhantom Fisher:\n{midnightchance3}% or 1/{100//midnightchance3+1}\n")
@@ -1063,8 +1178,8 @@ mochachance7=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmul
 mochachance8=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="mocha":
-    print("Chance for Mocha Dye:\n"
-        f"From Level 1 Potions: {mochachance1}% or 1/{100//mochachance1+1}\n"
+    print("\nChance for Mocha Dye:\n"
+        f"From Level 1 Potions: {mochachance1}% or 1/{100//mochachance1}\n" #no +1 for some reason
         f"From Level 2 Potions: {mochachance2}% or 1/{100//mochachance2+1}\n"
         f"From Level 3 Potions: {mochachance3}% or 1/{100//mochachance3+1}\n"
         f"From Level 4 Potions: {mochachance4}% or 1/{100//mochachance4+1}\n"
@@ -1079,7 +1194,7 @@ if dye=="mocha":
 mythologicalchance=(0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="mythological":
-    print("Chance for Mythological Dye:\n"
+    print("\nChance for Mythological Dye:\n"
         f"From digging up a Treasure Burrow: {mythologicalchance}% or 1/{100//mythologicalchance+1}\n")
 
 
@@ -1090,10 +1205,10 @@ nadeshikochance2=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*looting
 nadeshikochance3=(0.004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="nadeshiko":
-    print("Chance for Nadeshiko Dye to appear:\n"
-        f"In Supreme Superpairs Experiment: {nadeshikochance1}% or 1/{100//nadeshikochance1+1}\n"
-        f"In Transcendent Superpairs Experiment: {nadeshikochance2}% or 1/{100//nadeshikochance2+1}\n"
-        f"In Metaphysical Superpairs Experiment: {nadeshikochance3}% or 1/{100//nadeshikochance3+1}\n")
+    print("\nChance for Nadeshiko Dye to appear:\n"
+        f"In Supreme Superpairs Experiment:         {nadeshikochance1}% or 1/{100//nadeshikochance1+1}\n"
+        f"In Transcendent Superpairs Experiment:    {nadeshikochance2}% or 1/{100//nadeshikochance2+1}\n"
+        f"In Metaphysical Superpairs Experiment:    {nadeshikochance3}% or 1/{100//nadeshikochance3+1}\n")
 
 
 
@@ -1101,7 +1216,7 @@ if dye=="nadeshiko":
 necronchance=(0.04*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="necron":
-    print("Chance for Necron Dye:\n"
+    print("\nChance for Necron Dye:\n"
         f"From Bedrock Chest in Master Catacombs Floor VII: {necronchance}% or 1/{100//necronchance+1}\n")
 
 
@@ -1110,7 +1225,7 @@ if dye=="necron":
 nyanzachance=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="nyanza":
-    print("Chance for Nyanza Dye:\n"
+    print("\nChance for Nyanza Dye:\n"
         f"From completing a Commission: {nyanzachance}% or 1/{100//nyanzachance+1}\n")
 
 
@@ -1122,7 +1237,7 @@ pearlescentchance3=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*looti
 pearlescentchance4=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="pearlescent":
-    print("Chance for Pearlescent Dye:\n\n"
+    print("\nChance for Pearlescent Dye:\n\n"
         f"From:\nEnderman,\nEndermite,\nObsidiant Defender,\nSeer,\nZealot,\nZealot Bruiser:\n{pearlescentchance1}% or 1/{100//pearlescentchance1+1}\n\n"
         f"From:\nNest Endermite,\nVoidling Extremist,\nVoidling Fenatic:\n{pearlescentchance2}% or 1/{100//pearlescentchance2+1}\n\n"
         f"From:\nEnd Stone Protector,\nOld Dragon,\nProtector Dragon,\nSpecial Zealot,\nStrong Dragon,\nUnstable Dragon,\nWise Dragon,\nYoung Dragon:\n{pearlescentchance3}% or 1/{100//pearlescentchance3+1}\n\n"
@@ -1138,12 +1253,12 @@ peltchance4=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmulti
 peltchance5=(0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="pelt":
-    print("Chance for Pelt Dye:\n"
-        f"From a Trackable Animal: {peltchance1}% or 1/{100//peltchance1+1}\n"
-        f"From an Untrackable Animal: {peltchance2}% or 1/{100//peltchance2+1}\n"
-        f"From an Undetected Animal: {peltchance3}% or 1/{100//peltchance3+1}\n"
-        f"From an Endangered Animal: {peltchance4}% or 1/{100//peltchance4+1}\n"
-        f"From an Elusive Animal: {peltchance5}% or 1/{100//peltchance5+1}\n")
+    print("\nChance for Pelt Dye:\n"
+        f"From a Trackable Animal:      {peltchance1}% or 1/{100//peltchance1+1}\n"
+        f"From an Untrackable Animal:   {peltchance2}% or 1/{100//peltchance2+1}\n"
+        f"From an Undetected Animal:    {peltchance3}% or 1/{100//peltchance3+1}\n"
+        f"From an Endangered Animal:    {peltchance4}% or 1/{100//peltchance4+1}\n"
+        f"From an Elusive Animal:       {peltchance5}% or 1/{100//peltchance5+1}\n")
 
 
 
@@ -1155,12 +1270,12 @@ periwinklechance4=(0.0005*rngmultiplier*bucketmultiplier*vincentmultiplier*looti
 periwinklechance5=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="periwinkle":
-    print("Chance for Periwinkle Dye:\n"
-        f"From Level 1-99 Runic Mobs: {periwinklechance1}% or 1/{100//periwinklechance1+1}\n"
-        f"From Level 100-199 Runic Mobs: {periwinklechance2}% or 1/{100//periwinklechance2+1}\n"
-        f"From Level 200-299 Runic Mobs: {periwinklechance3}% or 1/{100//periwinklechance3+1}\n"
-        f"From Level 300-399 Runic Mobs: {periwinklechance4}% or 1/{100//periwinklechance4+1}\n"
-        f"From level 400+ Runic Mobs: {periwinklechance5}% or 1/{100//periwinklechance5+1}\n")
+    print("\nChance for Periwinkle Dye:\n"
+        f"From Level 1-99 Runic Mobs:       {periwinklechance1}% or 1/{100//periwinklechance1+1}\n"
+        f"From Level 100-199 Runic Mobs:    {periwinklechance2}% or 1/{100//periwinklechance2+1}\n"
+        f"From Level 200-299 Runic Mobs:    {periwinklechance3}% or 1/{100//periwinklechance3+1}\n"
+        f"From Level 300-399 Runic Mobs:    {periwinklechance4}% or 1/{100//periwinklechance4+1}\n"
+        f"From level 400+ Runic Mobs:       {periwinklechance5}% or 1/{100//periwinklechance5+1}\n")
 
 
 
@@ -1172,11 +1287,11 @@ sangriachance4=(0.0025*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingm
 sangriachance5=(0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="sangria":
-    print("Chance for Sangria Dye:\n"
+    print("\nChance for Sangria Dye:\n"
         f"From Tier 1 Riftstalker Bloodfiend: {sangriachance1}% or 1/{100//sangriachance1+1}\n"
         f"From Tier 2 Riftstalker Bloodfiend: {sangriachance2}% or 1/{100//sangriachance2+1}\n"
         f"From Toer 3 Riftstalker Bloodfiend: {sangriachance3}% or 1/{100//sangriachance3+1}\n"
-        f"From Tier 4 Riftstalker BloodfiendL {sangriachance4}% or 1/{100//sangriachance4+1}\n"
+        f"From Tier 4 Riftstalker Bloodfiend: {sangriachance4}% or 1/{100//sangriachance4+1}\n"
         f"From Tier 5 Riftstalker Bloodfiend: {sangriachance5}% or 1/{100//sangriachance5+1}\n")
 
 
@@ -1185,7 +1300,7 @@ if dye=="sangria":
 secretchance=(0.0001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="secret":
-    print("Chance for Secret Dye:\n"
+    print("\nChance for Secret Dye:\n"
         f"From Collecting a Secret: {secretchance}% or 1/{100//secretchance+1}\n")
 
 
@@ -1197,13 +1312,13 @@ tentaclechance3=(0.00167*rngmultiplier*bucketmultiplier*vincentmultiplier*lootin
 tentaclechance4=(0.0025*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 tentaclechance5=(0.005*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
-if dye=="tentactle":
-    print("Chance for Tentacle Dye:\n"
-        f"From a Basic Tier Kuudra Loot Chest: {tentaclechance1}% or 1/{100//tentaclechance1+1}\n"
-        f"From a Hot Tier Kuudra Loot Chest: {tentaclechance2}% or 1/{100//tentaclechance2+1}\n"
-        f"From a Burning Tier Kuudra Loot Chest: {tentaclechance3}% or 1/{100//tentaclechance3+1}\n"
-        f"From a Fiery Tier Kuudra Loot Chest: {tentaclechance4}% or 1/{100//tentaclechance4+1}\n"
-        f"From an Infernal Tier Kuudra Loot Chest: {tentaclechance5}% or 1/{100//tentaclechance5+1}\n")
+if dye=="tentacle":
+    print("\nChance for Tentacle Dye:\n"
+        f"From a Basic Tier Kuudra Loot Chest:      {tentaclechance1}% or 1/{100//tentaclechance1+1}\n"
+        f"From a Hot Tier Kuudra Loot Chest:        {tentaclechance2}% or 1/{100//tentaclechance2+1}\n"
+        f"From a Burning Tier Kuudra Loot Chest:    {tentaclechance3}% or 1/{100//tentaclechance3+1}\n"
+        f"From a Fiery Tier Kuudra Loot Chest:      {tentaclechance4}% or 1/{100//tentaclechance4+1}\n"
+        f"From an Infernal Tier Kuudra Loot Chest:  {tentaclechance5}% or 1/{100//tentaclechance5+1}\n")
 
 
 
@@ -1213,10 +1328,10 @@ treasurechance2=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingm
 treasurechance3=(0.01*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="treasure":
-    print("Chance for Treasure Dye:\n"
-        f"From a Good Catch: {treasurechance1}% or 1/{100//treasurechance1+1}\n"
-        f"From a Great Catch: {treasurechance2}% or 1/{100//treasurechance2+1}\n"
-        f"From an Outstanding Catch: {treasurechance3}% or 1/{100//treasurechance3+1}\n")
+    print("\nChance for Treasure Dye:\n"
+        f"From a Good Catch:            {treasurechance1}% or 1/{100//treasurechance1+1}\n"
+        f"From a Great Catch:           {treasurechance2}% or 1/{100//treasurechance2+1}\n"
+        f"From an Outstanding Catch:    {treasurechance3}% or 1/{100//treasurechance3+1}\n")
 
 
 
@@ -1224,5 +1339,5 @@ if dye=="treasure":
 wildstrawberrychance=(0.000000667*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="wild strawberry":
-    print("Chance for Wild Strawberry Dye:\n"
+    print("\nChance for Wild Strawberry Dye:\n"
         f"From Harvesting a Crop: {wildstrawberrychance}% or 1/{100//wildstrawberrychance+1}\n")
