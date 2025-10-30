@@ -100,30 +100,6 @@ while True:
 
 
 
-#input rng meter
-rngmeter=False
-rngmeteramount=0
-rngmultiplier=1
-if dye in rngList:
-    while True:
-        rngmeter=input("Do you have this Dye selected on your RNG-Meter? (Yes/No): ")
-        rngmeter=rngmeter.lower()
-        if rngmeter=="yes":
-            while True:
-                rngmeteramount=input("How much Slayer XP is in your RNG-Meter?: ")
-                if rngmeter>=0:
-                    break
-                elif rngmeteramount<0:
-                    print("You can't have negative Slayer XP in your RNG-Meter!")
-                else:
-                    print("Invalid input!")
-        elif rngmeter=="no":
-            break
-        else:
-            print("Invalid input!")
-
-
-
 #input vincent boost
 vincentmultiplier=1
 while True:
@@ -163,6 +139,30 @@ while True:
 
 
 
+#input rng meter
+rngmeter=False
+rngmeteramount=0
+rngmultiplier=1
+if dye in rngList:
+    while True:
+        rngmeter=input("Do you have this Dye selected on your RNG-Meter? (Yes/No): ")
+        rngmeter=rngmeter.lower()
+        if rngmeter=="yes":
+            while True:
+                rngmeteramount=input("How much Slayer XP is in your RNG-Meter?: ")
+                if rngmeter>=0:
+                    break
+                elif rngmeteramount<0:
+                    print("You can't have negative Slayer XP in your RNG-Meter!")
+                else:
+                    print("Invalid input!")
+        elif rngmeter=="no":
+            break
+        else:
+            print("Invalid input!")
+
+
+
 #is the dye affected by magic find (and looting)?
 magicfindaffected=False
 if dye in mfList:
@@ -182,14 +182,60 @@ if dye in rngList:
 
 #input magic find
 magicfind=0
+legionlevel=0
+legionamount=0
+lootinglevel=0
 if magicfindaffected==True:
     while True:
-        magicfind=int(input("How much Magic Find do you have?: "))
+        magicfind=input("How much Magic Find do you have?: ")
         if magicfind>=0:
             break
         elif magicfind<0:
             print("You can't have negative Magic Find!")
+        else:
+            print("Invalid input!")
+
+    #input legion level
+    while True:
+        legionlevel=input("What level of Legion do you have?: ")
+        if legionlevel>=0:
+            break
+        elif legionlevel<0:
+            print("You can't have a negative level of Legion!")
+        elif legionlevel>20:
+            print("You can't have a Legion level higher than 20!")
+        else:
+            print("Invalid input")
+
+    #input amount of people close 
+    while True:
+        legionamount=input("How many people are close to you?: ")
+        if legionamount>=0:
+            break
+        elif legionamount<0:
+            print("There can't be negative people close to you!")
+        elif legionamount>20:
+            legionamount=20
+            break
+        else:
+            print("Invalid Input")
+
+    #input looting level
+    while True:
+        lootinglevel=input("What level of Looting do you have?: ")
+        if lootinglevel>=0:
+            break
+        elif lootinglevel<0:
+            print("You can't have a negative level of Looting!")
+        elif lootinglevel>5:
+            print("You can't have a Looting level higher than 5!")
+        else:
+            print("Invalid input!")
+
+lootingmultiplier=(1+lootinglevel*0.15)
+magicfind=(magicfind*(0.007*legionamount*legionlevel))
 mfmultiplier=(1+magicfind/100)
+
 
 #input farming fortune
 farmingfortune=0
@@ -205,15 +251,17 @@ sugarcanefortune=0
 wheatfortune=0
 if farmingfortuneaffected==True:
     while True:
-        farmingfortune=int(input("How much Farming Fortune do you have? (With Vacuum equipped!): "))
+        farmingfortune=input("How much Farming Fortune do you have? (With Vacuum equipped!): ")
         if farmingfortune>=0:
             break
         elif farmingfortune<0:
             print("You can't have negative Farming Fortune!")
+        else:
+            print("Invalid input!")
     #input crop fortune
     #cactus
     while True:
-        cactusfortune=int(input("How much Cactus Fortune do you have? (With Vacuum equipped!): "))
+        cactusfortune=input("How much Cactus Fortune do you have? (With Vacuum equipped!): ")
         if cactusfortune>=0:
             break
         elif cactusfortune<0:
@@ -222,7 +270,7 @@ if farmingfortuneaffected==True:
             print("Invalid input!")
     #carrot
     while True:
-        carrotfortune=int(input("How much Carrot Fortune do you have? (With Vacuum equipped!): "))
+        carrotfortune=input("How much Carrot Fortune do you have? (With Vacuum equipped!): ")
         if carrotfortune>=0:
             break
         elif carrotfortune<0:
@@ -231,7 +279,7 @@ if farmingfortuneaffected==True:
             print("Invalid input!")
     #cocoabeans
     while True:
-        cocoabeansfortune=int(input("How much Cocoa Beans Fortune do you have? (With Vacuum equipped!): "))
+        cocoabeansfortune=input("How much Cocoa Beans Fortune do you have? (With Vacuum equipped!): ")
         if cocoabeansfortune>=0:
             break
         elif cocoabeansfortune<0:
@@ -240,7 +288,7 @@ if farmingfortuneaffected==True:
             print("Invalid input!")
     #melon
     while True:
-        melonfortune=int(input("How much Melon Fortune do you have? (With Vacuum equipped!): "))
+        melonfortune=input("How much Melon Fortune do you have? (With Vacuum equipped!): ")
         if melonfortune>=0:
             break
         elif melonfortune<0:
@@ -249,7 +297,7 @@ if farmingfortuneaffected==True:
             print("Invalid input!")
     #mushroom
     while True:
-        mushroomfortune=int(input("How much Mushroom Fortune do you have? (With Vacuum equipped!): "))
+        mushroomfortune=input("How much Mushroom Fortune do you have? (With Vacuum equipped!): ")
         if mushroomfortune>=0:
             break
         elif mushroomfortune<0:
@@ -258,7 +306,7 @@ if farmingfortuneaffected==True:
             print("Invalid input!")
     #nether wart
     while True:
-        netherwartfortune=int(input("How much Nether Wart Fortune do you have? (With Vacuum equipped!): "))
+        netherwartfortune=input("How much Nether Wart Fortune do you have? (With Vacuum equipped!): ")
         if netherwartfortune>=0:
             break
         elif netherwartfortune<0:
@@ -267,7 +315,7 @@ if farmingfortuneaffected==True:
             print("Invalid input!")
     #potato
     while True:
-        potatofortune=int(input("How much Potato Fortune do you have? (With Vacuum equipped!): "))
+        potatofortune=input("How much Potato Fortune do you have? (With Vacuum equipped!): ")
         if potatofortune>=0:
             break
         elif potatofortune<0:
@@ -276,7 +324,7 @@ if farmingfortuneaffected==True:
             print("Invalid input!")
     #pumpkin
     while True:
-        pumpkinfortune=int(input("How much Pumpkin Fortune do you have? (With Vacuum equipped!): "))
+        pumpkinfortune=input("How much Pumpkin Fortune do you have? (With Vacuum equipped!): ")
         if pumpkinfortune>=0:
             break
         elif pumpkinfortune<0:
@@ -285,7 +333,7 @@ if farmingfortuneaffected==True:
             print("Invalid input!")
     #sugar cane
     while True:
-        sugarcanefortune=int(input("How much Sugar Cane Fortune do you have? (With Vacuum equipped!): "))
+        sugarcanefortune=input("How much Sugar Cane Fortune do you have? (With Vacuum equipped!): ")
         if sugarcanefortune>=0:
             break
         elif sugarcanefortune<0:
@@ -294,52 +342,13 @@ if farmingfortuneaffected==True:
             print("Invalid input!")
     #wheat
     while True:
-        wheatfortune=int(input("How much Wheat Fortune do you have? (With Vacuum equipped!): "))
+        wheatfortune=input("How much Wheat Fortune do you have? (With Vacuum equipped!): ")
         if wheatfortune>=0:
             break
         elif wheatfortune<0:
             print("You can't have negative Wheat Fortune!")
         else:
             print("Invalid input!")
-
-
-
-#input legion level
-legionlevel=0
-legionamount=0
-lootinglevel=0
-if magicfindaffected==True:
-    while True:
-        legionlevel=int(input("What level of Legion do you have?: "))
-        if legionlevel<0:
-            print("You can't have a negative level of Legion!")
-        elif legionlevel>20:
-            print("You can't have a Legion level higher than 20!")
-        else:
-            break
-
-    #input amount of people close 
-    while True:
-        legionamount=int(input("How many people are close to you?: "))
-        if legionamount<0:
-            print("There can't be negative people close to you!")
-        elif legionamount>20:
-            legionamount=20
-            break
-        else:
-            break
-
-    #input looting level
-    while True:
-        lootinglevel=int(input("What level of Looting do you have?: "))
-        if lootinglevel<0:
-            print("You can't have a negative level of Looting!")
-        elif lootinglevel>5:
-            print("You can't have a Looting level higher than 5!")
-        else:
-            break
-legionmultiplier={1} #!!!!!!!!!!!!!!!!
-lootingmultiplier=(1+lootinglevel*0.15)
 
 
 
