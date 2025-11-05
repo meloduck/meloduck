@@ -8,10 +8,16 @@
 
 #to do:
     #make rng meter functional
-    #make fossil dye part a little more optimized
+    #test fossil dye optimizations!!!
     #add time estimates to all dyes maybe
     #make things prettier
     #gaurdian pet for nadeshiko!!
+    #look into exporting it as an exe file
+    #functions!
+    #add relevant attributes!
+    #distribute thru different files to make finding things easier
+    #make it so it doesn't ask for bucket of dye if the dye doesn't use it
+    #look into not doing // and +1 for dye calculations
 
 
 
@@ -86,6 +92,256 @@ rngList=[
     "nadeshiko",
     "necron",
     "sangria"]
+
+
+
+#functions
+#test if input is a integer, if not it makes it an integer if it can, else it returns an error and makes you try again
+def testint(prompt):
+    userinput=0
+
+    while True:
+        userinput=input(f"How much {prompt} Fortune do you have? (With Vacuum equipped!): ")
+        try:
+            userinput=int(userinput)
+            if userinput>=0:
+                break
+            elif userinput<0:
+                print(f"You can't have negative {prompt} Fortune!")
+        except:
+            print("Invalid input!")
+    return userinput
+
+#check gemstone slot 1 type
+def checkgemslot1type():
+    chiselgemstone1=""
+
+    while True:
+        chiselgemstone1=input("What type of Gemstone do you have in the 1st Gemstone Slot of your Chisel?: ")
+        chiselgemstone1=chiselgemstone1.lower()
+        if chiselgemstone1=="aquamarine":
+            break
+        elif chiselgemstone1=="citrine":
+            break
+        elif chiselgemstone1=="onyx":
+            break
+        else:
+            print("Invalid input!")
+    return chiselgemstone1
+    
+#check gemstone slot 1 tier
+def checkgemslot1tier():
+    chiselgemstonetier1=""
+    aquamarinemultiplier=0
+    citrinemultiplier=0
+    onyxmultiplier=0
+
+    while True:
+        chiselgemstonetier1=input("What tier of Gemstone do you have in the 1st Gemstone Slot of your Chisel?: ")
+        chiselgemstonetier1=chiselgemstonetier1.lower()
+        if chiselgemstonetier1=="1" or chiselgemstonetier1=="tier 1" or chiselgemstonetier1=="rough" or chiselgemstonetier1=="common" or chiselgemstonetier1=="grey" or chiselgemstonetier1=="gray":
+            if chiselgemstone1=="aquamarine":
+                aquamarinemultiplier+=30
+                break
+            elif chiselgemstone1=="citrine":
+                citrinemultiplier+=30
+                break
+            elif chiselgemstone1=="onyx":
+                onyxmultiplier+=30
+                break
+        elif chiselgemstonetier1=="2" or chiselgemstonetier1=="tier 2" or chiselgemstonetier1=="flawed" or chiselgemstonetier1=="uncommon" or chiselgemstonetier1=="green":
+            if chiselgemstone1=="aquamarine":
+                aquamarinemultiplier+=40
+                break
+            elif chiselgemstone1=="citrine":
+                citrinemultiplier+=40
+                break
+            elif chiselgemstone1=="onyx":
+                onyxmultiplier+=40
+                break
+        elif chiselgemstonetier1=="3" or chiselgemstonetier1=="tier 3" or chiselgemstonetier1=="fine" or chiselgemstonetier1=="rare" or chiselgemstonetier1=="blue":
+            if chiselgemstone1=="aquamarine":
+                aquamarinemultiplier+=50
+                break
+            elif chiselgemstone1=="citrine":
+                citrinemultiplier+=50
+                break
+            elif chiselgemstone1=="onyx":
+                onyxmultiplier+=50
+                break
+        elif chiselgemstonetier1=="4" or chiselgemstonetier1=="tier 4" or chiselgemstonetier1=="flawless" or chiselgemstonetier1=="epic" or chiselgemstonetier1=="purple":
+            if chiselgemstone1=="aquamarine":
+                aquamarinemultiplier+=60
+                break
+            elif chiselgemstone1=="citrine":
+                citrinemultiplier+=60
+                break
+            elif chiselgemstone1=="onyx":
+                onyxmultiplier+=60
+                break
+        elif chiselgemstonetier1=="5" or chiselgemstonetier1=="tier 5" or chiselgemstonetier1=="perfect" or chiselgemstonetier1=="legendary" or chiselgemstonetier1=="gold" or chiselgemstonetier1=="orange":
+            if chiselgemstone1=="aquamarine":
+                aquamarinemultiplier+=100
+                break
+            elif chiselgemstone1=="citrine":
+                citrinemultiplier+=100
+                break
+            elif chiselgemstone1=="onyx":
+                onyxmultiplier+=100
+                break
+        else:
+            print("Invalid input!")
+    return(chiselgemstone1,chiselgemstonetier1,aquamarinemultiplier,citrinemultiplier,onyxmultiplier)
+
+#check gemstone slot 2 type
+def checkgemslot2type():
+    chiselgemstone2=""
+    
+    while True:
+        chiselgemstone2=input("What type of Gemstone do you have in the 2nd Gemstone Slot of your Chisel?: ")
+        chiselgemstone2=chiselgemstone2.lower()
+        if chiselgemstone2=="aquamarine":
+            break
+        elif chiselgemstone2=="citrine":
+            break
+        elif chiselgemstone2=="onyx":
+            break
+        else:
+            print("Invalid input!")
+    return chiselgemstone2
+
+#check gemstone slot 2 tier
+def checkgemslot2tier():
+    while True:
+        chiselgemstonetier2=input("What tier of Gemstone do you have in the 2nd Gemstone Slot of your Chisel?: ")
+        chiselgemstonetier2=chiselgemstonetier2.lower()
+        if chiselgemstonetier2=="1" or chiselgemstonetier2=="tier 1" or chiselgemstonetier2=="rough" or chiselgemstonetier2=="common" or chiselgemstonetier2=="grey" or chiselgemstonetier2=="gray":
+            if chiselgemstone2=="aquamarine":
+                aquamarinemultiplier+=30
+                break
+            elif chiselgemstone2=="citrine":
+                citrinemultiplier+=30
+                break
+            elif chiselgemstone2=="onyx":
+                onyxmultiplier+=30
+                break
+        elif chiselgemstonetier2=="2" or chiselgemstonetier2=="tier 2" or chiselgemstonetier2=="flawed" or chiselgemstonetier2=="uncommon" or chiselgemstonetier2=="green":
+            if chiselgemstone2=="aquamarine":
+                aquamarinemultiplier+=40
+                break
+            elif chiselgemstone2=="citrine":
+                citrinemultiplier+=40
+                break
+            elif chiselgemstone2=="onyx":
+                onyxmultiplier+=40
+                break
+        elif chiselgemstonetier2=="3" or chiselgemstonetier2=="tier 3" or chiselgemstonetier2=="fine" or chiselgemstonetier2=="rare" or chiselgemstonetier2=="blue":
+            if chiselgemstone2=="aquamarine":
+                aquamarinemultiplier+=50
+                break
+            elif chiselgemstone2=="citrine":
+                citrinemultiplier+=50
+                break
+            elif chiselgemstone2=="onyx":
+                onyxmultiplier+=50
+                break
+        elif chiselgemstonetier2=="4" or chiselgemstonetier2=="tier 4" or chiselgemstonetier2=="flawless" or chiselgemstonetier2=="epic" or chiselgemstonetier2=="purple":
+            if chiselgemstone2=="aquamarine":
+                aquamarinemultiplier+=60
+                break
+            elif chiselgemstone2=="citrine":
+                citrinemultiplier+=60
+                break
+            elif chiselgemstone2=="onyx":
+                onyxmultiplier+=60
+                break
+        elif chiselgemstonetier2=="5" or chiselgemstonetier2=="tier 5" or chiselgemstonetier2=="perfect" or chiselgemstonetier2=="legendary" or chiselgemstonetier2=="gold" or chiselgemstonetier2=="orange":
+            if chiselgemstone2=="aquamarine":
+                aquamarinemultiplier+=100
+                break
+            elif chiselgemstone2=="citrine":
+                citrinemultiplier+=100
+                break
+            elif chiselgemstone2=="onyx":
+                onyxmultiplier+=100
+                break
+        else:
+            print("Invalid input!")
+    return(chiselgemstone2,chiselgemstonetier2,aquamarinemultiplier,citrinemultiplier,onyxmultiplier)
+
+#check gemstone slot 3 type
+def checkgemslot3type():
+    while True:
+        chiselgemstone3=input("What type of Gemstone do you have in the 3rd Gemstone Slot of your Chisel?: ")
+        chiselgemstone3=chiselgemstone3.lower()
+        if chiselgemstone3=="aquamarine":
+            break
+        elif chiselgemstone3=="citrine":
+            break
+        elif chiselgemstone3=="onyx":
+            break
+        else:
+            print("Invalid input!")
+    return chiselgemstone3
+
+#check gemstone slot 3 tier
+def checkgemslot3tier():
+    while True:
+        chiselgemstonetier3=input("What tier of Gemstone do you have in the 3rd Gemstone Slot of your Chisel?: ")
+        chiselgemstonetier3=chiselgemstonetier3.lower()
+        if chiselgemstonetier3=="1" or chiselgemstonetier3=="tier 1" or chiselgemstonetier3=="rough" or chiselgemstonetier3=="common" or chiselgemstonetier3=="grey" or chiselgemstonetier3=="gray":
+            if chiselgemstone3=="aquamarine":
+                aquamarinemultiplier+=30
+                break
+            elif chiselgemstone3=="citrine":
+                citrinemultiplier+=30
+                break
+            elif chiselgemstone3=="onyx":
+                onyxmultiplier+=30
+                break
+        elif chiselgemstonetier3=="2" or chiselgemstonetier3=="tier 2" or chiselgemstonetier3=="flawed" or chiselgemstonetier3=="uncommon" or chiselgemstonetier3=="green":
+            if chiselgemstone3=="aquamarine":
+                aquamarinemultiplier+=40
+                break
+            elif chiselgemstone3=="citrine":
+                citrinemultiplier+=40
+                break
+            elif chiselgemstone3=="onyx":
+                onyxmultiplier+=40
+                break
+        elif chiselgemstonetier3=="3" or chiselgemstonetier3=="tier 3" or chiselgemstonetier3=="fine" or chiselgemstonetier3=="rare" or chiselgemstonetier3=="blue":
+            if chiselgemstone3=="aquamarine":
+                aquamarinemultiplier+=50
+                break
+            elif chiselgemstone3=="citrine":
+                citrinemultiplier+=50
+                break
+            elif chiselgemstone3=="onyx":
+                onyxmultiplier+=50
+                break
+        elif chiselgemstonetier3=="4" or chiselgemstonetier3=="tier 4" or chiselgemstonetier3=="flawless" or chiselgemstonetier3=="epic" or chiselgemstonetier3=="purple":
+            if chiselgemstone3=="aquamarine":
+                aquamarinemultiplier+=60
+                break
+            elif chiselgemstone3=="citrine":
+                citrinemultiplier+=60
+                break
+            elif chiselgemstone3=="onyx":
+                onyxmultiplier+=60
+                break
+        elif chiselgemstonetier3=="5" or chiselgemstonetier3=="tier 5" or chiselgemstonetier3=="perfect" or chiselgemstonetier3=="legendary" or chiselgemstonetier3=="gold" or chiselgemstonetier3=="orange":
+            if chiselgemstone3=="aquamarine":
+                aquamarinemultiplier+=100
+                break
+            elif chiselgemstone3=="citrine":
+                citrinemultiplier+=100
+                break
+            elif chiselgemstone3=="onyx":
+                onyxmultiplier+=100
+                break
+        else:
+            print("Invalid input!")
+    return(chiselgemstone3,chiselgemstonetier3,aquamarinemultiplier,citrinemultiplier,onyxmultiplier)
 
 
 
@@ -188,28 +444,36 @@ lootinglevel=0
 if magicfindaffected==True:
     while True:
         magicfind=input("How much Magic Find do you have?: ")
+        try:
+            magicfind=int(magicfind)
+        except:
+            print("Invalid input!")
         if magicfind>=0:
             break
         elif magicfind<0:
             print("You can't have negative Magic Find!")
-        else:
-            print("Invalid input!")
 
     #input legion level
     while True:
         legionlevel=input("What level of Legion do you have?: ")
+        try:
+            legionlevel=int(legionlevel)
+        except:
+            print("Invalid input")
         if legionlevel>=0:
             break
         elif legionlevel<0:
             print("You can't have a negative level of Legion!")
         elif legionlevel>20:
             print("You can't have a Legion level higher than 20!")
-        else:
-            print("Invalid input")
 
     #input amount of people close 
     while True:
         legionamount=input("How many people are close to you?: ")
+        try:
+            legionamount=int(legionamount)
+        except:
+            print("Invalid Input")
         if legionamount>=0:
             break
         elif legionamount<0:
@@ -217,20 +481,20 @@ if magicfindaffected==True:
         elif legionamount>20:
             legionamount=20
             break
-        else:
-            print("Invalid Input")
 
     #input looting level
     while True:
         lootinglevel=input("What level of Looting do you have?: ")
+        try:
+            lootinglevel=int(lootinglevel)
+        except:
+            print("Invalid input!")
         if lootinglevel>=0:
             break
         elif lootinglevel<0:
             print("You can't have a negative level of Looting!")
         elif lootinglevel>5:
             print("You can't have a Looting level higher than 5!")
-        else:
-            print("Invalid input!")
 
 lootingmultiplier=(1+lootinglevel*0.15)
 magicfind=(magicfind*(0.007*legionamount*legionlevel))
@@ -252,103 +516,45 @@ wheatfortune=0
 if farmingfortuneaffected==True:
     while True:
         farmingfortune=input("How much Farming Fortune do you have? (With Vacuum equipped!): ")
+        try:
+            farmingfortune=int(farmingfortune)
+        except:
+            print("Invalid input!")
         if farmingfortune>=0:
             break
         elif farmingfortune<0:
             print("You can't have negative Farming Fortune!")
-        else:
-            print("Invalid input!")
+
     #input crop fortune
     #cactus
-    while True:
-        cactusfortune=input("How much Cactus Fortune do you have? (With Vacuum equipped!): ")
-        if cactusfortune>=0:
-            break
-        elif cactusfortune<0:
-            print("You can't have negative Cactus Fortune!")
-        else:
-            print("Invalid input!")
+    cactusfortune=testint("Cactus")
+    
     #carrot
-    while True:
-        carrotfortune=input("How much Carrot Fortune do you have? (With Vacuum equipped!): ")
-        if carrotfortune>=0:
-            break
-        elif carrotfortune<0:
-            print("You can't have negative Carrot Fortune!")
-        else:
-            print("Invalid input!")
+    carrotfortune=testint("Carrot")
+
     #cocoabeans
-    while True:
-        cocoabeansfortune=input("How much Cocoa Beans Fortune do you have? (With Vacuum equipped!): ")
-        if cocoabeansfortune>=0:
-            break
-        elif cocoabeansfortune<0:
-            print("You can't have negative Cocoa Beans Fortune!")
-        else:
-            print("Invalid input!")
+    cocoabeansfortune=testint("Cocoa Beans")
+
     #melon
-    while True:
-        melonfortune=input("How much Melon Fortune do you have? (With Vacuum equipped!): ")
-        if melonfortune>=0:
-            break
-        elif melonfortune<0:
-            print("You can't have negative Melon Fortune!")
-        else:
-            print("Invalid input!")
+    melonfortune=testint("Melon")
+
     #mushroom
-    while True:
-        mushroomfortune=input("How much Mushroom Fortune do you have? (With Vacuum equipped!): ")
-        if mushroomfortune>=0:
-            break
-        elif mushroomfortune<0:
-            print("You can't have negative Mushroom Fortune!")
-        else:
-            print("Invalid input!")
+    mushroomfortune=testint("Mushroom")
+
     #nether wart
-    while True:
-        netherwartfortune=input("How much Nether Wart Fortune do you have? (With Vacuum equipped!): ")
-        if netherwartfortune>=0:
-            break
-        elif netherwartfortune<0:
-            print("You can't have negative Nether Wart Fortune!")
-        else:
-            print("Invalid input!")
+    netherwartfortune=testint("Nether Wart")
+
     #potato
-    while True:
-        potatofortune=input("How much Potato Fortune do you have? (With Vacuum equipped!): ")
-        if potatofortune>=0:
-            break
-        elif potatofortune<0:
-            print("You can't have negative Potato Fortune!")
-        else:
-            print("Invalid input!")
+    potatofortune=testint("Potato")
+
     #pumpkin
-    while True:
-        pumpkinfortune=input("How much Pumpkin Fortune do you have? (With Vacuum equipped!): ")
-        if pumpkinfortune>=0:
-            break
-        elif pumpkinfortune<0:
-            print("You can't have negative Pumpkin Fortune!")
-        else:
-            print("Invalid input!")
+    pumpkinfortune=testint("Pumpkin")
+
     #sugar cane
-    while True:
-        sugarcanefortune=input("How much Sugar Cane Fortune do you have? (With Vacuum equipped!): ")
-        if sugarcanefortune>=0:
-            break
-        elif sugarcanefortune<0:
-            print("You can't have negative Sugar Cane Fortune!")
-        else:
-            print("Invalid input!")
+    sugarcanefortune=testint("Sugar Cane")
+
     #wheat
-    while True:
-        wheatfortune=input("How much Wheat Fortune do you have? (With Vacuum equipped!): ")
-        if wheatfortune>=0:
-            break
-        elif wheatfortune<0:
-            print("You can't have negative Wheat Fortune!")
-        else:
-            print("Invalid input!")
+    wheatfortune=testint("Wheat")
 
 
 
@@ -389,8 +595,9 @@ if dye=="fossil":
         #tier 2 chisel
         elif chisel=="reinforced" or chisel=="reinforced chisel" or chisel=="t2" or chisel=="2":
             #1st slot type
+            # chiselgemstone1=checkgemslot1type()
             while True:
-                chiselgemstone1=input("What type of Gemstone do you have in your Chisel?: ")
+                chiselgemstone1=input("What type of Gemstone do you have in the 1st Gemstone Slot of your Chisel?: ")
                 chiselgemstone1=chiselgemstone1.lower()
                 if chiselgemstone1=="aquamarine":
                     break
@@ -401,8 +608,9 @@ if dye=="fossil":
                 else:
                     print("Invalid input!")
             #1st slot tier
+            # chiselgemstonetier1=checkgemslot1tier()
             while True:
-                chiselgemstonetier1=input("What tier of Gemstone do you have in your Chisel?: ")
+                chiselgemstonetier1=input("What tier of Gemstone do you have in the 1st Gemstone Slot of your Chisel?: ")
                 chiselgemstonetier1=chiselgemstonetier1.lower()
                 if chiselgemstonetier1=="1" or chiselgemstonetier1=="tier 1" or chiselgemstonetier1=="rough" or chiselgemstonetier1=="common" or chiselgemstonetier1=="grey" or chiselgemstonetier1=="gray":
                     if chiselgemstone1=="aquamarine":
@@ -454,6 +662,9 @@ if dye=="fossil":
                     elif chiselgemstone1=="onyx":
                         onyxmultiplier+=100
                         break
+                else:
+                    print("Invalid input!")
+
         #tier 3 chisel
         elif chisel=="glacite-plated" or chisel=="glacite plated" or chisel=="glacite-plated chisel" or chisel=="glacite plated chisel" or chisel=="t3" or chisel=="3":
             #1st slot type
@@ -522,6 +733,8 @@ if dye=="fossil":
                     elif chiselgemstone1=="onyx":
                         onyxmultiplier+=100
                         break
+                else:
+                    print("Invalid input!")
             
             #2nd slot type
             while True:
@@ -589,6 +802,9 @@ if dye=="fossil":
                     elif chiselgemstone2=="onyx":
                         onyxmultiplier+=100
                         break
+                else:
+                    print("Invalid input!")
+
         #tier 4 chisel
         elif chisel=="perfect" or chisel=="perfect chisel" or chisel=="t4" or chisel=="4":
             #1st slot type
@@ -657,6 +873,9 @@ if dye=="fossil":
                     elif chiselgemstone1=="onyx":
                         onyxmultiplier+=100
                         break
+                else:
+                    print("Invalid input!")
+
             #2nd slot type
             while True:
                 chiselgemstone2=input("What type of Gemstone do you have in the 2nd Gemstone Slot of your Chisel?: ")
@@ -723,6 +942,9 @@ if dye=="fossil":
                     elif chiselgemstone2=="onyx":
                         onyxmultiplier+=100
                         break
+                else:
+                    print("Invalid input!")
+
             #3rd slot type
             while True:
                 chiselgemstone3=input("What type of Gemstone do you have in the 3rd Gemstone Slot of your Chisel?: ")
@@ -789,6 +1011,8 @@ if dye=="fossil":
                     elif chiselgemstone3=="onyx":
                         onyxmultiplier+=100
                         break
+                else:
+                    print("Invalid input!")
         else:
             break
         break
@@ -836,40 +1060,40 @@ if dye=="fossil":
 
 
 #print info
-print(f"\n\ndye: {dye}")
+print(f"\n\nSelected Dye: {dye}")
 if rngmeter=="yes":
-    print(f"rng meter: {rngmeter}")
-    print(f"XP: {rngmeteramount}")
-print(f"boosted: {boost}")
+    print(f"Selected on RNG-Meter: {rngmeter}")
+    print(f"Amount of XP in RNG-Meter: {rngmeteramount}")
+print(f"Boosted by Vincent: {boost}")
 if boost=="yes":
-    print(f"boosted by: {vincentmultiplierinput}\n\n")
+    print(f"Boosted by: {vincentmultiplierinput}\n\n")
 if dye=="fossil":
-    print(f"chisel tier: {chisel}\n")
+    print(f"Chisel tier: {chisel}\n")
     if chisel=="reinforced" or chisel=="reinforced chisel" or chisel=="t2" or chisel=="2":
-        print(f"gemstone type: {chiselgemstone1}")
-        print(f"gemstone tier: {chiselgemstonetier1}\n")
+        print(f"Gemstone type: {chiselgemstone1}")
+        print(f"Gemstone tier: {chiselgemstonetier1}\n")
     elif chisel=="glacite-plated" or chisel=="glacite plated" or chisel=="glacite-plated chisel" or chisel=="glacite plated chisel" or chisel=="t3" or chisel=="3":
-        print(f"1st slot gemstone type: {chiselgemstone1}")
-        print(f"1st slot gemstone tier: {chiselgemstonetier1}\n")
-        print(f"2nd slot gemstone type: {chiselgemstone2}")
-        print(f"2nd slot gemstone tier: {chiselgemstonetier2}\n")
+        print(f"1st slot Gemstone type: {chiselgemstone1}")
+        print(f"1st slot Gemstone tier: {chiselgemstonetier1}\n")
+        print(f"2nd slot Gemstone type: {chiselgemstone2}")
+        print(f"2nd slot Gemstone tier: {chiselgemstonetier2}\n")
     elif chisel=="perfect" or chisel=="perfect chisel" or chisel=="t4" or chisel=="4":
-        print(f"1st slot gemstone type: {chiselgemstone1}")
-        print(f"1st slot gemstone tier: {chiselgemstonetier1}\n")
-        print(f"2nd slotgemstone type: {chiselgemstone2}")
-        print(f"2nd slot gemstone tier: {chiselgemstonetier2}\n")
-        print(f"3rd slot gemstone type: {chiselgemstone3}")
-        print(f"3rd slot gemstone tier: {chiselgemstonetier3}\n")
-    print(f"fungloom attribute level: {fungloom}\n\n")
+        print(f"1st slot Gemstone type: {chiselgemstone1}")
+        print(f"1st slot Gemstone tier: {chiselgemstonetier1}\n")
+        print(f"2nd slot Gemstone type: {chiselgemstone2}")
+        print(f"2nd slot Gemstone tier: {chiselgemstonetier2}\n")
+        print(f"3rd slot Gemstone type: {chiselgemstone3}")
+        print(f"3rd slot Gemstone tier: {chiselgemstonetier3}\n")
+    print(f"Fungloom Attribute level: {fungloom}\n")
 if magicfindaffected==True:
     print(
-        f"magic find: {magicfind}\n"
-        f"legion level: {legionlevel}\n"
-        f"legion amount: {legionamount}")
+        f"Magic Find: {magicfind}\n"
+        f"Legion level: {legionlevel}\n"
+        f"Amount of people close: {legionamount}")
 if farmingfortuneaffected==True:
-    print(f"\nfarming fortune: {farmingfortune}")
+    print(f"\nFarming Fortune: {farmingfortune}")
 if magicfindaffected==True:
-    print(f"looting level: {lootinglevel}")
+    print(f"Looting level: {lootinglevel}")
 
 
 
@@ -894,8 +1118,8 @@ archfiendchance2=(0.15*bucketmultiplier*vincentmultiplier)
 
 if dye=="archfiend":
     print("\nChance for Archfiend Dye:\n"
-        f"From Archfiend Dice:              {archfiendchance1}% or 1/{100//archfiendchance1+1}\n"
-        f"From High Class Archfiend Dice:   {archfiendchance2}% or 1/{100//archfiendchance2+1}\n")
+        f"From rolling an Archfiend Dice:           {archfiendchance1}% or 1/{100//archfiendchance1+1}\n"
+        f"From rolling a High Class Archfiend Dice: {archfiendchance2}% or 1/{100//archfiendchance2+1}\n")
 
 
 
@@ -952,8 +1176,8 @@ if dye=="carmine":
 
 
 #celadon
-celadonchance1=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier)
-celadonchance2=(0.01*rngmultiplier*bucketmultiplier*vincentmultiplier)
+celadonchance1=(0.001*rngmultiplier*vincentmultiplier)
+celadonchance2=(0.01*rngmultiplier*vincentmultiplier)
 
 if dye=="celadon":
     print("\nChance for Celadon Dye:\n"
@@ -1008,7 +1232,7 @@ if dye=="cyclamen":
 
 
 #dark purple
-darkpurplechance=(0.748*bucketmultiplier*vincentmultiplier)
+darkpurplechance=(0.748*vincentmultiplier)
 
 if dye=="dark purple":
     print("\nChance for Dark Purple Dye:\n"
@@ -1289,11 +1513,11 @@ if dye=="periwinkle":
 
 
 #sangria
-sangriachance1=(0.001*rngmultiplier*bucketmultiplier*vincentmultiplier)
-sangriachance2=(0.00125*rngmultiplier*bucketmultiplier*vincentmultiplier)
-sangriachance3=(0.00167*rngmultiplier*bucketmultiplier*vincentmultiplier)
-sangriachance4=(0.0025*rngmultiplier*bucketmultiplier*vincentmultiplier)
-sangriachance5=(0.01*rngmultiplier*bucketmultiplier*vincentmultiplier)
+sangriachance1=(0.001*rngmultiplier*vincentmultiplier)
+sangriachance2=(0.00125*rngmultiplier*vincentmultiplier)
+sangriachance3=(0.00167*rngmultiplier*vincentmultiplier)
+sangriachance4=(0.0025*rngmultiplier*vincentmultiplier)
+sangriachance5=(0.01*rngmultiplier*vincentmultiplier)
 
 if dye=="sangria":
     print("\nChance for Sangria Dye:\n"
