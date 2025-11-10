@@ -8,16 +8,13 @@
 
 #to do:
     #make rng meter functional
-    #test fossil dye optimizations!!!
+    #test fossil dye optimizations!!! AQUA/CITRINE/ONYX MULTIPLIERS DON'T WORK FORT SOME REASON RAHHHHHH
     #add time estimates to all dyes maybe
-    #make things prettier
-    #gaurdian pet for nadeshiko!!
     #look into exporting it as an exe file
     #functions!
     #add relevant attributes!
     #distribute thru different files to make finding things easier
-    #make it so it doesn't ask for bucket of dye if the dye doesn't use it
-    #look into not doing // and +1 for dye calculations
+    #TURN IT INTO A WEBSITE (dyehunters.com)
 
 
 
@@ -73,6 +70,7 @@ mfList=[
     "cyclamen",
     "iceberg",
     "midnight",
+    "mythological",
     "pearlescent",
     "periwinkle"]
 
@@ -80,7 +78,7 @@ mfList=[
 ffList=[
     "dung"]
 
-#rng meter (affected) list
+#rng meter affected list
 rngList=[
     "brick red",
     "byzantium",
@@ -92,6 +90,43 @@ rngList=[
     "nadeshiko",
     "necron",
     "sangria"]
+
+#bucket of dye affected list
+bucketofdyeList=[
+    "aquamarine",
+    "archfiend",
+    "bone",
+    "brick red",
+    "byzantium",
+    "carmine",
+    "celeste",
+    "copper",
+    "cyclamen",
+    "dark purple",
+    "dung",
+    "emerald",
+    "flame",
+    "fossil",
+    "frostbitten",
+    "holly",
+    "iceberg",
+    "jade",
+    "livid",
+    "mango",
+    "matcha",
+    "midnight",
+    "mocha",
+    "mythological",
+    "nadeshiko",
+    "necron",
+    "nyanza",
+    "pearlescent",
+    "pelt",
+    "periwinkle",
+    "secret",
+    "tentacle",
+    "treasure",
+    "wild strawberry"]
 
 
 
@@ -212,6 +247,11 @@ def checkgemslot2type():
 
 #check gemstone slot 2 tier
 def checkgemslot2tier():
+    chiselgemstonetier2=""
+    aquamarinemultiplier=0
+    citrinemultiplier=0
+    onyxmultiplier=0
+
     while True:
         chiselgemstonetier2=input("What tier of Gemstone do you have in the 2nd Gemstone Slot of your Chisel?: ")
         chiselgemstonetier2=chiselgemstonetier2.lower()
@@ -271,6 +311,8 @@ def checkgemslot2tier():
 
 #check gemstone slot 3 type
 def checkgemslot3type():
+    chiselgemstone3=""
+
     while True:
         chiselgemstone3=input("What type of Gemstone do you have in the 3rd Gemstone Slot of your Chisel?: ")
         chiselgemstone3=chiselgemstone3.lower()
@@ -286,6 +328,11 @@ def checkgemslot3type():
 
 #check gemstone slot 3 tier
 def checkgemslot3tier():
+    chiselgemstonetier3=""
+    aquamarinemultiplier=0
+    citrinemultiplier=0
+    onyxmultiplier=0
+    
     while True:
         chiselgemstonetier3=input("What tier of Gemstone do you have in the 3rd Gemstone Slot of your Chisel?: ")
         chiselgemstonetier3=chiselgemstonetier3.lower()
@@ -364,10 +411,10 @@ while True:
     if boost=="yes":
         while True:
             vincentmultiplierinput=input("By how much? (...x): ")
-            if vincentmultiplierinput=="2x"or vincentmultiplierinput=="2":
+            if vincentmultiplierinput=="2x"or vincentmultiplier=="x2"or vincentmultiplierinput=="2":
                 vincentmultiplier=2
                 break
-            elif vincentmultiplierinput=="3x"or vincentmultiplierinput=="3":
+            elif vincentmultiplierinput=="3x"or vincentmultiplier=="x3"or vincentmultiplierinput=="3":
                 vincentmultiplier=3
                 break
             else:
@@ -382,16 +429,17 @@ while True:
 
 #input bucket of dye
 bucketmultiplier=1
-while True:
-    bucketofdye=input("Do you have a Bucket Of Dye? (Yes/No): ")
-    bucketofdye=bucketofdye.lower()
-    if bucketofdye=="yes":
-        bucketmultiplier=1.01
-        break
-    elif bucketofdye=="no":
-        break
-    else:
-        print("Please say 'yes' or 'no'!")
+if dye in bucketofdyeList:
+    while True:
+        bucketofdye=input("Do you have a Bucket Of Dye? (Yes/No): ")
+        bucketofdye=bucketofdye.lower()
+        if bucketofdye=="yes":
+            bucketmultiplier=1.01
+            break
+        elif bucketofdye=="no":
+            break
+        else:
+            print("Please say 'yes' or 'no'!")
 
 
 
@@ -468,19 +516,21 @@ if magicfindaffected==True:
             print("You can't have a Legion level higher than 20!")
 
     #input amount of people close 
-    while True:
-        legionamount=input("How many people are close to you?: ")
-        try:
-            legionamount=int(legionamount)
-        except:
-            print("Invalid Input")
-        if legionamount>=0:
-            break
-        elif legionamount<0:
-            print("There can't be negative people close to you!")
-        elif legionamount>20:
-            legionamount=20
-            break
+    if legionlevel>0:
+        while True:
+            legionamount=input("How many people are close to you?: ")
+            try:
+                legionamount=int(legionamount)
+            except:
+                print("Invalid Input")
+            if legionamount>=0:
+                break
+            elif legionamount<0:
+                print("There can't be negative people close to you!")
+            elif legionamount>20:
+                legionamount=20 
+                break
+
 
     #input looting level
     while True:
@@ -595,426 +645,44 @@ if dye=="fossil":
         #tier 2 chisel
         elif chisel=="reinforced" or chisel=="reinforced chisel" or chisel=="t2" or chisel=="2":
             #1st slot type
-            # chiselgemstone1=checkgemslot1type()
-            while True:
-                chiselgemstone1=input("What type of Gemstone do you have in the 1st Gemstone Slot of your Chisel?: ")
-                chiselgemstone1=chiselgemstone1.lower()
-                if chiselgemstone1=="aquamarine":
-                    break
-                elif chiselgemstone1=="citrine":
-                    break
-                elif chiselgemstone1=="onyx":
-                    break
-                else:
-                    print("Invalid input!")
+            chiselgemstone1=checkgemslot1type()
+            
             #1st slot tier
-            # chiselgemstonetier1=checkgemslot1tier()
-            while True:
-                chiselgemstonetier1=input("What tier of Gemstone do you have in the 1st Gemstone Slot of your Chisel?: ")
-                chiselgemstonetier1=chiselgemstonetier1.lower()
-                if chiselgemstonetier1=="1" or chiselgemstonetier1=="tier 1" or chiselgemstonetier1=="rough" or chiselgemstonetier1=="common" or chiselgemstonetier1=="grey" or chiselgemstonetier1=="gray":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=30
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=30
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=30
-                        break
-                elif chiselgemstonetier1=="2" or chiselgemstonetier1=="tier 2" or chiselgemstonetier1=="flawed" or chiselgemstonetier1=="uncommon" or chiselgemstonetier1=="green":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=40
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=40
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=40
-                        break
-                elif chiselgemstonetier1=="3" or chiselgemstonetier1=="tier 3" or chiselgemstonetier1=="fine" or chiselgemstonetier1=="rare" or chiselgemstonetier1=="blue":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=50
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=50
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=50
-                        break
-                elif chiselgemstonetier1=="4" or chiselgemstonetier1=="tier 4" or chiselgemstonetier1=="flawless" or chiselgemstonetier1=="epic" or chiselgemstonetier1=="purple":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=60
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=60
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=60
-                        break
-                elif chiselgemstonetier1=="5" or chiselgemstonetier1=="tier 5" or chiselgemstonetier1=="perfect" or chiselgemstonetier1=="legendary" or chiselgemstonetier1=="gold" or chiselgemstonetier1=="orange":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=100
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=100
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=100
-                        break
-                else:
-                    print("Invalid input!")
-
+            chiselgemstonetier1=checkgemslot1tier()
+            
         #tier 3 chisel
         elif chisel=="glacite-plated" or chisel=="glacite plated" or chisel=="glacite-plated chisel" or chisel=="glacite plated chisel" or chisel=="t3" or chisel=="3":
             #1st slot type
-            while True:
-                chiselgemstone1=input("What type of Gemstone do you have in the 1st Gemstone Slot of your Chisel?: ")
-                chiselgemstone1=chiselgemstone1.lower()
-                if chiselgemstone1=="aquamarine":
-                    break
-                elif chiselgemstone1=="citrine":
-                    break
-                elif chiselgemstone1=="onyx":
-                    break
-                else:
-                    print("Invalid input!")
+            chiselgemstone1=checkgemslot1type()
+
             #1st slot tier
-            while True:
-                chiselgemstonetier1=input("What tier of Gemstone do you have in the 1st Gemstone Slot of your Chisel?: ")
-                chiselgemstonetier1=chiselgemstonetier1.lower()
-                if chiselgemstonetier1=="1" or chiselgemstonetier1=="tier 1" or chiselgemstonetier1=="rough" or chiselgemstonetier1=="common" or chiselgemstonetier1=="grey" or chiselgemstonetier1=="gray":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=30
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=30
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=30
-                        break
-                elif chiselgemstonetier1=="2" or chiselgemstonetier1=="tier 2" or chiselgemstonetier1=="flawed" or chiselgemstonetier1=="uncommon" or chiselgemstonetier1=="green":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=40
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=40
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=40
-                        break
-                elif chiselgemstonetier1=="3" or chiselgemstonetier1=="tier 3" or chiselgemstonetier1=="fine" or chiselgemstonetier1=="rare" or chiselgemstonetier1=="blue":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=50
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=50
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=50
-                        break
-                elif chiselgemstonetier1=="4" or chiselgemstonetier1=="tier 4" or chiselgemstonetier1=="flawless" or chiselgemstonetier1=="epic" or chiselgemstonetier1=="purple":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=60
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=60
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=60
-                        break
-                elif chiselgemstonetier1=="5" or chiselgemstonetier1=="tier 5" or chiselgemstonetier1=="perfect" or chiselgemstonetier1=="legendary" or chiselgemstonetier1=="gold" or chiselgemstonetier1=="orange":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=100
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=100
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=100
-                        break
-                else:
-                    print("Invalid input!")
+            chiselgemstonetier1=checkgemslot1tier()
             
             #2nd slot type
-            while True:
-                chiselgemstone2=input("What type of Gemstone do you have in the 2nd Gemstone Slot of your Chisel?: ")
-                chiselgemstone2=chiselgemstone2.lower()
-                if chiselgemstone2=="aquamarine":
-                    break
-                elif chiselgemstone2=="citrine":
-                    break
-                elif chiselgemstone2=="onyx":
-                    break
-                else:
-                    print("Invalid input!")
+            chiselgemstone2=checkgemslot2type()
+
             #2nd slot tier
-            while True:
-                chiselgemstonetier2=input("What tier of Gemstone do you have in the 2nd Gemstone Slot of your Chisel?: ")
-                chiselgemstonetier2=chiselgemstonetier2.lower()
-                if chiselgemstonetier2=="1" or chiselgemstonetier2=="tier 1" or chiselgemstonetier2=="rough" or chiselgemstonetier2=="common" or chiselgemstonetier2=="grey" or chiselgemstonetier2=="gray":
-                    if chiselgemstone2=="aquamarine":
-                        aquamarinemultiplier+=30
-                        break
-                    elif chiselgemstone2=="citrine":
-                        citrinemultiplier+=30
-                        break
-                    elif chiselgemstone2=="onyx":
-                        onyxmultiplier+=30
-                        break
-                elif chiselgemstonetier2=="2" or chiselgemstonetier2=="tier 2" or chiselgemstonetier2=="flawed" or chiselgemstonetier2=="uncommon" or chiselgemstonetier2=="green":
-                    if chiselgemstone2=="aquamarine":
-                        aquamarinemultiplier+=40
-                        break
-                    elif chiselgemstone2=="citrine":
-                        citrinemultiplier+=40
-                        break
-                    elif chiselgemstone2=="onyx":
-                        onyxmultiplier+=40
-                        break
-                elif chiselgemstonetier2=="3" or chiselgemstonetier2=="tier 3" or chiselgemstonetier2=="fine" or chiselgemstonetier2=="rare" or chiselgemstonetier2=="blue":
-                    if chiselgemstone2=="aquamarine":
-                        aquamarinemultiplier+=50
-                        break
-                    elif chiselgemstone2=="citrine":
-                        citrinemultiplier+=50
-                        break
-                    elif chiselgemstone2=="onyx":
-                        onyxmultiplier+=50
-                        break
-                elif chiselgemstonetier2=="4" or chiselgemstonetier2=="tier 4" or chiselgemstonetier2=="flawless" or chiselgemstonetier2=="epic" or chiselgemstonetier2=="purple":
-                    if chiselgemstone2=="aquamarine":
-                        aquamarinemultiplier+=60
-                        break
-                    elif chiselgemstone2=="citrine":
-                        citrinemultiplier+=60
-                        break
-                    elif chiselgemstone2=="onyx":
-                        onyxmultiplier+=60
-                        break
-                elif chiselgemstonetier2=="5" or chiselgemstonetier2=="tier 5" or chiselgemstonetier2=="perfect" or chiselgemstonetier2=="legendary" or chiselgemstonetier2=="gold" or chiselgemstonetier2=="orange":
-                    if chiselgemstone2=="aquamarine":
-                        aquamarinemultiplier+=100
-                        break
-                    elif chiselgemstone2=="citrine":
-                        citrinemultiplier+=100
-                        break
-                    elif chiselgemstone2=="onyx":
-                        onyxmultiplier+=100
-                        break
-                else:
-                    print("Invalid input!")
+            chiselgemstonetier2=checkgemslot2tier()
 
         #tier 4 chisel
         elif chisel=="perfect" or chisel=="perfect chisel" or chisel=="t4" or chisel=="4":
             #1st slot type
-            while True:
-                chiselgemstone1=input("What type of Gemstone do you have in the 1st Gemstone Slot of your Chisel?: ")
-                chiselgemstone1=chiselgemstone1.lower()
-                if chiselgemstone1=="aquamarine":
-                    break
-                elif chiselgemstone1=="citrine":
-                    break
-                elif chiselgemstone1=="onyx":
-                    break
-                else:
-                    print("Invalid input!")
+            chiselgemstone1=checkgemslot1type()
+
             #1st slot tier
-            while True:
-                chiselgemstonetier1=input("What tier of Gemstone do you have in the 1st Gemstone Slot of your Chisel?: ")
-                chiselgemstonetier1=chiselgemstonetier1.lower()
-                if chiselgemstonetier1=="1" or chiselgemstonetier1=="tier 1" or chiselgemstonetier1=="rough" or chiselgemstonetier1=="common" or chiselgemstonetier1=="grey" or chiselgemstonetier1=="gray":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=30
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=30
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=30
-                        break
-                elif chiselgemstonetier1=="2" or chiselgemstonetier1=="tier 2" or chiselgemstonetier1=="flawed" or chiselgemstonetier1=="uncommon" or chiselgemstonetier1=="green":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=40
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=40
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=40
-                        break
-                elif chiselgemstonetier1=="3" or chiselgemstonetier1=="tier 3" or chiselgemstonetier1=="fine" or chiselgemstonetier1=="rare" or chiselgemstonetier1=="blue":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=50
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=50
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=50
-                        break
-                elif chiselgemstonetier1=="4" or chiselgemstonetier1=="tier 4" or chiselgemstonetier1=="flawless" or chiselgemstonetier1=="epic" or chiselgemstonetier1=="purple":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=60
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=60
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=60
-                        break
-                elif chiselgemstonetier1=="5" or chiselgemstonetier1=="tier 5" or chiselgemstonetier1=="perfect" or chiselgemstonetier1=="legendary" or chiselgemstonetier1=="gold" or chiselgemstonetier1=="orange":
-                    if chiselgemstone1=="aquamarine":
-                        aquamarinemultiplier+=100
-                        break
-                    elif chiselgemstone1=="citrine":
-                        citrinemultiplier+=100
-                        break
-                    elif chiselgemstone1=="onyx":
-                        onyxmultiplier+=100
-                        break
-                else:
-                    print("Invalid input!")
+            chiselgemstonetier1=checkgemslot1tier()
 
             #2nd slot type
-            while True:
-                chiselgemstone2=input("What type of Gemstone do you have in the 2nd Gemstone Slot of your Chisel?: ")
-                chiselgemstone2=chiselgemstone2.lower()
-                if chiselgemstone2=="aquamarine":
-                    break
-                elif chiselgemstone2=="citrine":
-                    break
-                elif chiselgemstone2=="onyx":
-                    break
-                else:
-                    print("Invalid input!")
+            chiselgemstone2=checkgemslot2type()
+
             #2nd slot tier
-            while True:
-                chiselgemstonetier2=input("What tier of Gemstone do you have in the 2nd Gemstone Slot of your Chisel?: ")
-                chiselgemstonetier2=chiselgemstonetier2.lower()
-                if chiselgemstonetier2=="1" or chiselgemstonetier2=="tier 1" or chiselgemstonetier2=="rough" or chiselgemstonetier2=="common" or chiselgemstonetier2=="grey" or chiselgemstonetier2=="gray":
-                    if chiselgemstone2=="aquamarine":
-                        aquamarinemultiplier+=30
-                        break
-                    elif chiselgemstone2=="citrine":
-                        citrinemultiplier+=30
-                        break
-                    elif chiselgemstone2=="onyx":
-                        onyxmultiplier+=30
-                        break
-                elif chiselgemstonetier2=="2" or chiselgemstonetier2=="tier 2" or chiselgemstonetier2=="flawed" or chiselgemstonetier2=="uncommon" or chiselgemstonetier2=="green":
-                    if chiselgemstone2=="aquamarine":
-                        aquamarinemultiplier+=40
-                        break
-                    elif chiselgemstone2=="citrine":
-                        citrinemultiplier+=40
-                        break
-                    elif chiselgemstone2=="onyx":
-                        onyxmultiplier+=40
-                        break
-                elif chiselgemstonetier2=="3" or chiselgemstonetier2=="tier 3" or chiselgemstonetier2=="fine" or chiselgemstonetier2=="rare" or chiselgemstonetier2=="blue":
-                    if chiselgemstone2=="aquamarine":
-                        aquamarinemultiplier+=50
-                        break
-                    elif chiselgemstone2=="citrine":
-                        citrinemultiplier+=50
-                        break
-                    elif chiselgemstone2=="onyx":
-                        onyxmultiplier+=50
-                        break
-                elif chiselgemstonetier2=="4" or chiselgemstonetier2=="tier 4" or chiselgemstonetier2=="flawless" or chiselgemstonetier2=="epic" or chiselgemstonetier2=="purple":
-                    if chiselgemstone2=="aquamarine":
-                        aquamarinemultiplier+=60
-                        break
-                    elif chiselgemstone2=="citrine":
-                        citrinemultiplier+=60
-                        break
-                    elif chiselgemstone2=="onyx":
-                        onyxmultiplier+=60
-                        break
-                elif chiselgemstonetier2=="5" or chiselgemstonetier2=="tier 5" or chiselgemstonetier2=="perfect" or chiselgemstonetier2=="legendary" or chiselgemstonetier2=="gold" or chiselgemstonetier2=="orange":
-                    if chiselgemstone2=="aquamarine":
-                        aquamarinemultiplier+=100
-                        break
-                    elif chiselgemstone2=="citrine":
-                        citrinemultiplier+=100
-                        break
-                    elif chiselgemstone2=="onyx":
-                        onyxmultiplier+=100
-                        break
-                else:
-                    print("Invalid input!")
+            chiselgemstonetier2=checkgemslot2tier()
 
             #3rd slot type
-            while True:
-                chiselgemstone3=input("What type of Gemstone do you have in the 3rd Gemstone Slot of your Chisel?: ")
-                chiselgemstone3=chiselgemstone3.lower()
-                if chiselgemstone3=="aquamarine":
-                    break
-                elif chiselgemstone3=="citrine":
-                    break
-                elif chiselgemstone3=="onyx":
-                    break
-                else:
-                    print("Invalid input!")
+            chiselgemstone3=checkgemslot3type()
+
             #3rd slot tier
-            while True:
-                chiselgemstonetier3=input("What tier of Gemstone do you have in the 3rd Gemstone Slot of your Chisel?: ")
-                chiselgemstonetier3=chiselgemstonetier3.lower()
-                if chiselgemstonetier3=="1" or chiselgemstonetier3=="tier 1" or chiselgemstonetier3=="rough" or chiselgemstonetier3=="common" or chiselgemstonetier3=="grey" or chiselgemstonetier3=="gray":
-                    if chiselgemstone3=="aquamarine":
-                        aquamarinemultiplier+=30
-                        break
-                    elif chiselgemstone3=="citrine":
-                        citrinemultiplier+=30
-                        break
-                    elif chiselgemstone3=="onyx":
-                        onyxmultiplier+=30
-                        break
-                elif chiselgemstonetier3=="2" or chiselgemstonetier3=="tier 2" or chiselgemstonetier3=="flawed" or chiselgemstonetier3=="uncommon" or chiselgemstonetier3=="green":
-                    if chiselgemstone3=="aquamarine":
-                        aquamarinemultiplier+=40
-                        break
-                    elif chiselgemstone3=="citrine":
-                        citrinemultiplier+=40
-                        break
-                    elif chiselgemstone3=="onyx":
-                        onyxmultiplier+=40
-                        break
-                elif chiselgemstonetier3=="3" or chiselgemstonetier3=="tier 3" or chiselgemstonetier3=="fine" or chiselgemstonetier3=="rare" or chiselgemstonetier3=="blue":
-                    if chiselgemstone3=="aquamarine":
-                        aquamarinemultiplier+=50
-                        break
-                    elif chiselgemstone3=="citrine":
-                        citrinemultiplier+=50
-                        break
-                    elif chiselgemstone3=="onyx":
-                        onyxmultiplier+=50
-                        break
-                elif chiselgemstonetier3=="4" or chiselgemstonetier3=="tier 4" or chiselgemstonetier3=="flawless" or chiselgemstonetier3=="epic" or chiselgemstonetier3=="purple":
-                    if chiselgemstone3=="aquamarine":
-                        aquamarinemultiplier+=60
-                        break
-                    elif chiselgemstone3=="citrine":
-                        citrinemultiplier+=60
-                        break
-                    elif chiselgemstone3=="onyx":
-                        onyxmultiplier+=60
-                        break
-                elif chiselgemstonetier3=="5" or chiselgemstonetier3=="tier 5" or chiselgemstonetier3=="perfect" or chiselgemstonetier3=="legendary" or chiselgemstonetier3=="gold" or chiselgemstonetier3=="orange":
-                    if chiselgemstone3=="aquamarine":
-                        aquamarinemultiplier+=100
-                        break
-                    elif chiselgemstone3=="citrine":
-                        citrinemultiplier+=100
-                        break
-                    elif chiselgemstone3=="onyx":
-                        onyxmultiplier+=100
-                        break
-                else:
-                    print("Invalid input!")
-        else:
-            break
+            chiselgemstonetier3=checkgemslot3tier()
         break
 
     #fungloom shard
@@ -1067,6 +735,8 @@ if rngmeter=="yes":
 print(f"Boosted by Vincent: {boost}")
 if boost=="yes":
     print(f"Boosted by: {vincentmultiplierinput}\n\n")
+if dye in bucketofdyeList:
+    print(f"Bucket of Dye: {bucketofdye}")
 if dye=="fossil":
     print(f"Chisel tier: {chisel}\n")
     if chisel=="reinforced" or chisel=="reinforced chisel" or chisel=="t2" or chisel=="2":
@@ -1106,9 +776,9 @@ aquamarinechance3=(0.0002*bucketmultiplier*vincentmultiplier*lootingmultiplier*m
 
 if dye=="aquamarine":
     print("\nChance for Aquamarine Dye:\n"
-        f"From Common/Uncommon Water Sea Creatures:     {aquamarinechance1}% or 1/{100//aquamarinechance1+1}\n"
-        f"From Rare/Epic Water Sea Creatures:           {aquamarinechance2}% or 1/{100//aquamarinechance2+1}\n"
-        f"From Legendary/Mythic Water Sea Creatures:    {aquamarinechance3}% or 1/{100//aquamarinechance3+1}\n")
+        f"From Common/Uncommon Water Sea Creatures:     {aquamarinechance1}% or 1/{100/aquamarinechance1}\n"
+        f"From Rare/Epic Water Sea Creatures:           {aquamarinechance2}% or 1/{100/aquamarinechance2}\n"
+        f"From Legendary/Mythic Water Sea Creatures:    {aquamarinechance3}% or 1/{100/aquamarinechance3}\n")
 
 
 
@@ -1118,17 +788,17 @@ archfiendchance2=(0.15*bucketmultiplier*vincentmultiplier)
 
 if dye=="archfiend":
     print("\nChance for Archfiend Dye:\n"
-        f"From rolling an Archfiend Dice:           {archfiendchance1}% or 1/{100//archfiendchance1+1}\n"
-        f"From rolling a High Class Archfiend Dice: {archfiendchance2}% or 1/{100//archfiendchance2+1}\n")
+        f"From rolling an Archfiend Dice:           {archfiendchance1}% or 1/{100/archfiendchance1}\n"
+        f"From rolling a High Class Archfiend Dice: {archfiendchance2}% or 1/{100/archfiendchance2}\n")
 
 
 
 #bone
-bonechance=(0.0000333*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+bonechance=((1/30000)*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="bone":
     print("\nChance for Bone Dye:\n"
-        f"From any skeletal mob: {bonechance}% or 1/{100//bonechance+1}\n")
+        f"From any skeletal mob: {bonechance}% or 1/{100/bonechance}\n")
 
 
 
@@ -1140,10 +810,10 @@ brickredchance4=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier)
 
 if dye=="brick red":
     print("\nChance for Brick Red Dye:\n"
-          f"From Tier 1 Tarantula Broodfather: {brickredchance1}% or 1/{100//brickredchance1+1}\n"
-          f"From Tier 2 Tarantula Broodfather: {brickredchance2}% or 1/{100//brickredchance2+1}\n"
-          f"From Tier 3 Tarantula Broodfather: {brickredchance3}% or 1/{100//brickredchance3+1}\n"
-          f"From Tier 4 Tarantula Broodfather: {brickredchance4}% or 1/{100//brickredchance4+1}\n")
+          f"From Tier 1 Tarantula Broodfather: {brickredchance1}% or 1/{100/brickredchance1}\n"
+          f"From Tier 2 Tarantula Broodfather: {brickredchance2}% or 1/{100/brickredchance2}\n"
+          f"From Tier 3 Tarantula Broodfather: {brickredchance3}% or 1/{100/brickredchance3}\n"
+          f"From Tier 4 Tarantula Broodfather: {brickredchance4}% or 1/{100/brickredchance4}\n")
 
 
 
@@ -1155,10 +825,10 @@ byzantiumchance4=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier)
 
 if dye=="byzantium":
     print("\nChance for Byzantium Dye:\n"
-        f"From Tier 1 Voidgloom Seraph: {byzantiumchance1}% or 1/{100//byzantiumchance1+1}\n"
-        f"From Tier 2 Voidgloom Seraph: {byzantiumchance2}% or 1/{100//byzantiumchance2+1}\n"
-        f"From Tier 3 Voidgloom Seraph: {byzantiumchance3}% or 1/{100//byzantiumchance3+1}\n"
-        f"From Tier 4 Voidgloom Seraph: {byzantiumchance4}% or 1/{100//byzantiumchance4+1}\n")
+        f"From Tier 1 Voidgloom Seraph: {byzantiumchance1}% or 1/{100/byzantiumchance1}\n"
+        f"From Tier 2 Voidgloom Seraph: {byzantiumchance2}% or 1/{100/byzantiumchance2}\n"
+        f"From Tier 3 Voidgloom Seraph: {byzantiumchance3}% or 1/{100/byzantiumchance3}\n"
+        f"From Tier 4 Voidgloom Seraph: {byzantiumchance4}% or 1/{100/byzantiumchance4}\n")
 
 
 
@@ -1169,9 +839,9 @@ carminechance3=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmu
 
 if dye=="carmine":
     print("\nChance for Carmine Dye:\n"
-          f"From Common/Uncommon Lava Sea Creatures:    {carminechance1}% or 1/{100//carminechance1+1}\n"
-          f"From Rare/Epic Lava Sea Creatures:          {carminechance2}% or 1/{100//carminechance2+1}\n"
-          f"From Legendary/Mythic Lava Sea Creatures:   {carminechance3}% or 1/{100//carminechance3+1}\n")
+          f"From Common/Uncommon Lava Sea Creatures:    {carminechance1}% or 1/{100/carminechance1}\n"
+          f"From Rare/Epic Lava Sea Creatures:          {carminechance2}% or 1/{100/carminechance2}\n"
+          f"From Legendary/Mythic Lava Sea Creatures:   {carminechance3}% or 1/{100/carminechance3}\n")
 
 
 
@@ -1181,8 +851,8 @@ celadonchance2=(0.01*rngmultiplier*vincentmultiplier)
 
 if dye=="celadon":
     print("\nChance for Celadon Dye:\n"
-          f"From Blobbercyst:   {celadonchance1}% or 1/{100//celadonchance1+1}\n"
-          f"From Bacte:         {celadonchance2}% or 1/{100//celadonchance2+1}\n")
+          f"From Blobbercyst:   {celadonchance1}% or 1/{100/celadonchance1}\n"
+          f"From Bacte:         {celadonchance2}% or 1/{100/celadonchance2}\n")
 
 
 
@@ -1194,10 +864,10 @@ celestechance4=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier)
 
 if dye=="celeste":
     print("\nChance for Celeste Dye:\n"
-        f"From Tier 1 Sven Packmaster: {celestechance1}% or 1/{100//celestechance1+1}\n"
-        f"From Tier 2 Sven Packmaster: {celestechance2}% or 1/{100//celestechance2+1}\n"
-        f"From Tier 3 Sven Packmaster: {celestechance3}% or 1/{100//celestechance3+1}\n"
-        f"From Tier 4 Sven Packmaster: {celestechance4}% or 1/{100//celestechance4+1}\n")
+        f"From Tier 1 Sven Packmaster: {celestechance1}% or 1/{100/celestechance1}\n"
+        f"From Tier 2 Sven Packmaster: {celestechance2}% or 1/{100/celestechance2}\n"
+        f"From Tier 3 Sven Packmaster: {celestechance3}% or 1/{100/celestechance3}\n"
+        f"From Tier 4 Sven Packmaster: {celestechance4}% or 1/{100/celestechance4}\n")
 
 
 
@@ -1210,11 +880,11 @@ copperchance5=(0.2*bucketmultiplier*vincentmultiplier)
 
 if dye=="copper":
     print("\nChance for Copper Dye:\n"
-          f"From Uncommon Visitor:  {copperchance1}% or 1/{100//copperchance1+1}\n"
-          f"From Rare Visitor:      {copperchance2}% or 1/{100//copperchance2+1}\n"
-          f"From Legendary Visitor: {copperchance3}% or 1/{100//copperchance3+1}\n"
-          f"From Mythic Visitor:    {copperchance4}% or 1/{100//copperchance4+1}\n"
-          f"From Special Visitor:   {copperchance5}% or 1/{100//copperchance5+1}\n")
+          f"From Uncommon Visitor:  {copperchance1}% or 1/{100/copperchance1}\n"
+          f"From Rare Visitor:      {copperchance2}% or 1/{100/copperchance2}\n"
+          f"From Legendary Visitor: {copperchance3}% or 1/{100/copperchance3}\n"
+          f"From Mythic Visitor:    {copperchance4}% or 1/{100/copperchance4}\n"
+          f"From Special Visitor:   {copperchance5}% or 1/{100/copperchance5}\n")
 
 
 
@@ -1225,9 +895,9 @@ cyclamenchance3=(0.0004*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfm
 
 if dye=="cyclamen":
     print("\nChance for Cyclamen Dye:\n\n"
-        f"From:\nBezal,/nBlaze,\nFlaming Spider,\nFlare,\nKada Knight,\nMagma Cube,\nMagma Cube Rider,\nMushroom Bull,\nMutated Blaze,\nWither Skeleton,\nWither Spectre:\n{cyclamenchance1}% or 1/{100//cyclamenchance1+1}\n\n"
-        f"From:\nBarbarian,\nBarbarian Gaurd,\nDive Ghast,\nFire Mage,\nGhast,\nGoliath Barbarian,\nKrondor Necromancer,\nMage Gaurd,\nMagma Glare,\nMatcho,\nMillenia-Aged Blaze,\nSmoldering Blaze,\nUnstable Magma:\n{cyclamenchance2}% or 1/{100//cyclamenchance2+1}\n\n"
-        f"From:\nAshfang,\nBarbarian Duke X,\nBladesoul,\nCinderbat,\nHellwisp,\nMage Outlaw,\nMagma Boss,\nVanquisher:\n{cyclamenchance3}% or 1/{100//cyclamenchance3+1}\n")
+        f"From:\nBezal,\nBlaze,\nFlaming Spider,\nFlare,\nKada Knight,\nMagma Cube,\nMagma Cube Rider,\nMushroom Bull,\nMutated Blaze,\nWither Skeleton,\nWither Spectre:\n{cyclamenchance1}% or 1/{100/cyclamenchance1}\n\n"
+        f"From:\nBarbarian,\nBarbarian Gaurd,\nDive Ghast,\nFire Mage,\nGhast,\nGoliath Barbarian,\nKrondor Necromancer,\nMage Gaurd,\nMagma Glare,\nMatcho,\nMillenia-Aged Blaze,\nSmoldering Blaze,\nUnstable Magma:\n{cyclamenchance2}% or 1/{100/cyclamenchance2}\n\n"
+        f"From:\nAshfang,\nBarbarian Duke X,\nBladesoul,\nCinderbat,\nHellwisp,\nMage Outlaw,\nMagma Boss,\nVanquisher:\n{cyclamenchance3}% or 1/{100/cyclamenchance3}\n")
 
 
 
@@ -1236,7 +906,7 @@ darkpurplechance=(0.748*vincentmultiplier)
 
 if dye=="dark purple":
     print("\nChance for Dark Purple Dye:\n"
-        f"To appear in a Dark(er) Auction lobby: {darkpurplechance}% or 1/{100//darkpurplechance+1}\n")
+        f"To appear in a Dark(er) Auction lobby: {darkpurplechance}% or 1/{100/darkpurplechance}\n")
 
 
 
@@ -1255,17 +925,17 @@ dungchanceslug=(0.0002*bucketmultiplier*vincentmultiplier*(1+(farmingfortune+mus
 
 if dye=="dung":
     print("\nChance for Dung Dye:\n"
-        f"From a Beetle:        {dungchancebeetle}% or 1/{100//dungchancebeetle+1}\n"
-        f"From a Cricket:       {dungchancecricket}% or 1/{100//dungchancecricket+1}\n"
-        f"From an Earthworm:    {dungchanceearthworm}% or 1/{100//dungchanceearthworm+1}\n"
-        f"From a Field Mouse:   {dungchancefieldmouse}% or 1/{100//dungchancefieldmouse+1}\n"
-        f"From a Fly:           {dungchancefly}% or 1/{100//dungchancefly+1}\n"
-        f"From a Locust:        {dungchancelocust}% or 1/{100//dungchancelocust+1}\n"
-        f"From a Mite:          {dungchancemite}% or 1/{100//dungchancemite+1}\n"
-        f"From a Mosquito:      {dungchancemosquito}% or 1/{100//dungchancemosquito+1}\n"
-        f"From a Moth:          {dungchancemoth}% or 1/{100//dungchancemoth+1}\n"
-        f"From a Rat:           {dungchancerat}% or 1/{100//dungchancerat+1}\n"
-        f"From a Slug:          {dungchanceslug}% or 1/{100//dungchanceslug+1}\n")
+        f"From a Beetle:        {dungchancebeetle}% or 1/{100/dungchancebeetle}\n"
+        f"From a Cricket:       {dungchancecricket}% or 1/{100/dungchancecricket}\n"
+        f"From an Earthworm:    {dungchanceearthworm}% or 1/{100/dungchanceearthworm}\n"
+        f"From a Field Mouse:   {dungchancefieldmouse}% or 1/{100/dungchancefieldmouse}\n"
+        f"From a Fly:           {dungchancefly}% or 1/{100/dungchancefly}\n"
+        f"From a Locust:        {dungchancelocust}% or 1/{100/dungchancelocust}\n"
+        f"From a Mite:          {dungchancemite}% or 1/{100/dungchancemite}\n"
+        f"From a Mosquito:      {dungchancemosquito}% or 1/{100/dungchancemosquito}\n"
+        f"From a Moth:          {dungchancemoth}% or 1/{100/dungchancemoth}\n"
+        f"From a Rat:           {dungchancerat}% or 1/{100/dungchancerat}\n"
+        f"From a Slug:          {dungchanceslug}% or 1/{100/dungchanceslug}\n")
 
 
 
@@ -1274,7 +944,7 @@ emeraldchance=(0.00002*bucketmultiplier*vincentmultiplier)
 
 if dye=="emerald":
     print("\nChance for Emerald Dye:\n"
-        f"Per Emerald (Ore) broken: {emeraldchance}% or 1/{100//emeraldchance+1}\n")
+        f"Per Emerald (Ore) broken: {emeraldchance}% or 1/{100/emeraldchance}\n")
 
 
 
@@ -1286,10 +956,10 @@ flamechance4=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier)
 
 if dye=="flame":
     print("\nChance for Flame Dye:\n"
-        f"From Tier 1 Inferno Demonlord: {flamechance1}% or 1/{100//flamechance1+1}\n"
-        f"From Tier 2 Inferno Demonlord: {flamechance2}% or 1/{100//flamechance2+1}\n"
-        f"From Tier 3 Inferno Demonlord: {flamechance3}% or 1/{100//flamechance3+1}\n"
-        f"From Tier 4 Inferno Demonlord: {flamechance4}% or 1/{100//flamechance4+1}\n")
+        f"From Tier 1 Inferno Demonlord: {flamechance1}% or 1/{100/flamechance1}\n"
+        f"From Tier 2 Inferno Demonlord: {flamechance2}% or 1/{100/flamechance2}\n"
+        f"From Tier 3 Inferno Demonlord: {flamechance3}% or 1/{100/flamechance3}\n"
+        f"From Tier 4 Inferno Demonlord: {flamechance4}% or 1/{100/flamechance4}\n")
 
 
 
@@ -1303,8 +973,9 @@ fossilchanceperscrap=(0.0002*bucketmultiplier*vincentmultiplier*treasures*((chis
 
 if dye=="fossil":
     print("\nChance for Fossil Dye:\n"
-        f"To replace any Treasure in Fossil Excavator:  {fossilchance}% or 1/{100//fossilchance+1}\n"
-        f"To BE OBTAINED per scrap:                     {fossilchanceperscrap}% or 1/{100//fossilchanceperscrap+1}\n")
+        f"To replace any Treasure in Fossil Excavator:  {fossilchance}% or 1/{100/fossilchance}\n"
+        f"To BE OBTAINED per scrap:                     {fossilchanceperscrap}% or 1/{100/fossilchanceperscrap}\n")
+    print(aquamarinemultiplier, citrinemultiplier, onyxmultiplier)
 
 
 
@@ -1315,9 +986,9 @@ frostbittenchance3=(0.01*bucketmultiplier*vincentmultiplier)
 
 if dye=="frostbitten":
     print("\nChance for Frostbitten Dye:\n"
-        f"From Lapis Corpse:            {frostbittenchance1}% or 1/{100//frostbittenchance1+1}\n"
-        f"From Umber/Tungsten Corpse:   {frostbittenchance2}% or 1/{100//frostbittenchance2+1}\n"
-        f"From Vangaurd Corpse:         {frostbittenchance3}% or 1/{100//frostbittenchance3+1}\n")
+        f"From Lapis Corpse:            {frostbittenchance1}% or 1/{100/frostbittenchance1}\n"
+        f"From Umber/Tungsten Corpse:   {frostbittenchance2}% or 1/{100/frostbittenchance2}\n"
+        f"From Vangaurd Corpse:         {frostbittenchance3}% or 1/{100/frostbittenchance3}\n")
 
 
 
@@ -1326,7 +997,7 @@ hollychance=(0.00125*bucketmultiplier*vincentmultiplier)
 
 if dye=="holly":
     print("\nChance for Holly Dye:\n"
-        f"From Red Gift: {hollychance}% or 1/{100//hollychance+1}\n")
+        f"From Red Gift: {hollychance}% or 1/{100/hollychance}\n")
 
 
 
@@ -1337,9 +1008,9 @@ icerbergchance3=(0.002*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmu
 
 if dye=="icerberg":
     print("\nChance for Icerberg Dye:\n\n"
-        f"From:\nFrosty,\nFrozen Steve:\n{icerbergchance1}% or 1/{100//icerbergchance1+1}\n\n"
-        f"From:\nNutcracker:\n{icerbergchance2}% or 1/{100//icerbergchance2+1}\n\n"
-        f"From:\nYeti:{icerbergchance3}% or 1/{100//icerbergchance3+1}\n")
+        f"From:\nFrosty,\nFrozen Steve:\n{icerbergchance1}% or 1/{100/icerbergchance1}\n\n"
+        f"From:\nNutcracker:\n{icerbergchance2}% or 1/{100/icerbergchance2}\n\n"
+        f"From:\nYeti:{icerbergchance3}% or 1/{100/icerbergchance3}\n")
 
 
 
@@ -1348,7 +1019,7 @@ jadechance=(0.0002*rngmultiplier*bucketmultiplier*vincentmultiplier)
 
 if dye=="jade":
     print("\nChance for Jade Dye:\n"
-        f"Per item roll in a Crystal Nucleus Bundle: {jadechance}% or 1/{100//jadechance+1}\n")
+        f"Per item roll in a Crystal Nucleus Bundle: {jadechance}% or 1/{100/jadechance}\n")
 
 
 
@@ -1357,7 +1028,7 @@ lividchance=(0.02*rngmultiplier*bucketmultiplier*vincentmultiplier)
 
 if dye=="livid":
     print("\nChance for Livid Dye:\n"
-        f"From Bedrock Chest in Master Catacombs Floor V {lividchance}% or 1/{100//lividchance+1}\n")
+        f"From Bedrock Chest in Master Catacombs Floor V {lividchance}% or 1/{100/lividchance}\n")
 
 
 
@@ -1366,7 +1037,7 @@ mangochance=(0.00001*bucketmultiplier*vincentmultiplier)
 
 if dye=="mango":
     print("\nChance for Mango Dye:\n"
-          f"From breaking any log: {mangochance}% or 1/{100//mangochance+1}\n")
+          f"From breaking any log: {mangochance}% or 1/{100/mangochance}\n")
 
 
 
@@ -1379,11 +1050,11 @@ matchachance5=(0.0004*rngmultiplier*bucketmultiplier*vincentmultiplier)
 
 if dye=="matcha":
     print("\nChance for Matcha Dye:\n"
-        f"From Tier 1 Revenant Horror: {matchachance1}% or 1/{100//matchachance1+1}\n"
-        f"From Tier 2 Revenant Horror: {matchachance2}% or 1/{100//matchachance2+1}\n"
-        f"From Tier 3 Revenant Horror: {matchachance3}% or 1/{100//matchachance3+1}\n"
-        f"From Tier 4 Revenant Horror: {matchachance4}% or 1/{100//matchachance4+1}\n"
-        f"From Tier 5 Revenant Horror: {matchachance5}% or 1/{100//matchachance5+1}\n")
+        f"From Tier 1 Revenant Horror: {matchachance1}% or 1/{100/matchachance1}\n"
+        f"From Tier 2 Revenant Horror: {matchachance2}% or 1/{100/matchachance2}\n"
+        f"From Tier 3 Revenant Horror: {matchachance3}% or 1/{100/matchachance3}\n"
+        f"From Tier 4 Revenant Horror: {matchachance4}% or 1/{100/matchachance4}\n"
+        f"From Tier 5 Revenant Horror: {matchachance5}% or 1/{100/matchachance5}\n")
 
 
 
@@ -1394,9 +1065,9 @@ midnightchance3=(0.002*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmu
 
 if dye=="midnight":
     print("\nChance for Midnight Dye:\n\n"
-        f"From:\nCrazy Witch,\nPhantom Spirit,\nScary Jerry,\nTrick or Treater,\nWither Gourd,\nWraith:\n{midnightchance1}% or 1/{100//midnightchance1+1}\n\n"
-        f"From:\nNightmare,\nScarecrow,\nWerewolf:\n{midnightchance2}% or 1/{100//midnightchance2+1}\n\n"
-        f"From:\nGrim Reaper,\nHeadless Horseman,\nPhantom Fisher:\n{midnightchance3}% or 1/{100//midnightchance3+1}\n")
+        f"From:\nCrazy Witch,\nPhantom Spirit,\nScary Jerry,\nTrick or Treater,\nWither Gourd,\nWraith:\n{midnightchance1}% or 1/{100/midnightchance1}\n\n"
+        f"From:\nNightmare,\nScarecrow,\nWerewolf:\n{midnightchance2}% or 1/{100/midnightchance2}\n\n"
+        f"From:\nGrim Reaper,\nHeadless Horseman,\nPhantom Fisher:\n{midnightchance3}% or 1/{100/midnightchance3}\n")
 
 
 
@@ -1412,23 +1083,31 @@ mochachance8=(0.001*bucketmultiplier*vincentmultiplier)
 
 if dye=="mocha":
     print("\nChance for Mocha Dye:\n"
-        f"From Level 1 Potions: {mochachance1}% or 1/{100//mochachance1}\n" #no +1 for some reason
-        f"From Level 2 Potions: {mochachance2}% or 1/{100//mochachance2+1}\n"
-        f"From Level 3 Potions: {mochachance3}% or 1/{100//mochachance3+1}\n"
-        f"From Level 4 Potions: {mochachance4}% or 1/{100//mochachance4+1}\n"
-        f"From Level 5 Potions: {mochachance5}% or 1/{100//mochachance5+1}\n"
-        f"From Level 6 Potions: {mochachance6}% or 1/{100//mochachance6+1}\n"
-        f"From Level 7 Potions: {mochachance7}% or 1/{100//mochachance7+1}\n"
-        f"From Level 8 Potions: {mochachance8}% or 1/{100//mochachance8+1}\n")
+        f"From Level 1 Potions: {mochachance1}% or 1/{100/mochachance1}\n"
+        f"From Level 2 Potions: {mochachance2}% or 1/{100/mochachance2}\n"
+        f"From Level 3 Potions: {mochachance3}% or 1/{100/mochachance3}\n"
+        f"From Level 4 Potions: {mochachance4}% or 1/{100/mochachance4}\n"
+        f"From Level 5 Potions: {mochachance5}% or 1/{100/mochachance5}\n"
+        f"From Level 6 Potions: {mochachance6}% or 1/{100/mochachance6}\n"
+        f"From Level 7 Potions: {mochachance7}% or 1/{100/mochachance7}\n"
+        f"From Level 8 Potions: {mochachance8}% or 1/{100/mochachance8}\n")
 
 
 
 #mythological
-mythologicalchance=(0.0001*bucketmultiplier*vincentmultiplier)
+mythologicalchance1=(0.0001*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+mythologicalchance2=(0.0002*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+mythologicalchance3=(0.0004*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+mythologicalchance4=(0.002*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+mythologicalchance5=(0.01*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="mythological":
     print("\nChance for Mythological Dye:\n"
-        f"From digging up a Treasure Burrow: {mythologicalchance}% or 1/{100//mythologicalchance+1}\n")
+        f"From:\nCretan Bull,\nMinos Hunter,\nSiamese Lynx,\nStranded Nymph:\n{mythologicalchance1}% or 1/{100/mythologicalchance1}\n"
+        f"From:\nGaia Construct,\nHarpy:\n{mythologicalchance2}% or 1/{100/mythologicalchance2}\n"
+        f"From:\nMinos Champion,\nMinotaur:\n{mythologicalchance3}% or 1/{100/mythologicalchance3}\n"
+        f"From:\nMinos Inquisitor,\nSphinx:\n{mythologicalchance4}% or 1/{100/mythologicalchance4}\n"
+        f"From:\nKing Minos,\nManticore:\n{mythologicalchance5}% or 1/{100/mythologicalchance5}\n")
 
 
 
@@ -1439,9 +1118,9 @@ nadeshikochance3=(0.004*rngmultiplier*bucketmultiplier*vincentmultiplier)
 
 if dye=="nadeshiko":
     print("\nChance for Nadeshiko Dye to appear:\n"
-        f"In Supreme Superpairs Experiment:         {nadeshikochance1}% or 1/{100//nadeshikochance1+1}\n"
-        f"In Transcendent Superpairs Experiment:    {nadeshikochance2}% or 1/{100//nadeshikochance2+1}\n"
-        f"In Metaphysical Superpairs Experiment:    {nadeshikochance3}% or 1/{100//nadeshikochance3+1}\n")
+        f"In Supreme Superpairs Experiment:         {nadeshikochance1}% or 1/{100/nadeshikochance1}\n"
+        f"In Transcendent Superpairs Experiment:    {nadeshikochance2}% or 1/{100/nadeshikochance2}\n"
+        f"In Metaphysical Superpairs Experiment:    {nadeshikochance3}% or 1/{100/nadeshikochance3}\n")
 
 
 
@@ -1450,7 +1129,7 @@ necronchance=(0.04*rngmultiplier*bucketmultiplier*vincentmultiplier)
 
 if dye=="necron":
     print("\nChance for Necron Dye:\n"
-        f"From Bedrock Chest in Master Catacombs Floor VII: {necronchance}% or 1/{100//necronchance+1}\n")
+        f"From Bedrock Chest in Master Catacombs Floor VII: {necronchance}% or 1/{100/necronchance}\n")
 
 
 
@@ -1459,7 +1138,7 @@ nyanzachance=(0.0004*bucketmultiplier*vincentmultiplier)
 
 if dye=="nyanza":
     print("\nChance for Nyanza Dye:\n"
-        f"From completing a Commission: {nyanzachance}% or 1/{100//nyanzachance+1}\n")
+        f"From completing a Commission: {nyanzachance}% or 1/{100/nyanzachance}\n")
 
 
 
@@ -1471,10 +1150,10 @@ pearlescentchance4=(0.002*bucketmultiplier*vincentmultiplier*lootingmultiplier*m
 
 if dye=="pearlescent":
     print("\nChance for Pearlescent Dye:\n\n"
-        f"From:\nEnderman,\nEndermite,\nObsidiant Defender,\nSeer,\nZealot,\nZealot Bruiser:\n{pearlescentchance1}% or 1/{100//pearlescentchance1+1}\n\n"
-        f"From:\nNest Endermite,\nVoidling Extremist,\nVoidling Fenatic:\n{pearlescentchance2}% or 1/{100//pearlescentchance2+1}\n\n"
-        f"From:\nEnd Stone Protector,\nOld Dragon,\nProtector Dragon,\nSpecial Zealot,\nStrong Dragon,\nUnstable Dragon,\nWise Dragon,\nYoung Dragon:\n{pearlescentchance3}% or 1/{100//pearlescentchance3+1}\n\n"
-        f"From:\nSuperior Dragon:\n{pearlescentchance4}% or 1/{100//pearlescentchance4+1}\n")
+        f"From:\nEnderman,\nEndermite,\nObsidiant Defender,\nSeer,\nZealot,\nZealot Bruiser:\n{pearlescentchance1}% or 1/{100/pearlescentchance1}\n\n"
+        f"From:\nNest Endermite,\nVoidling Extremist,\nVoidling Fenatic:\n{pearlescentchance2}% or 1/{100/pearlescentchance2}\n\n"
+        f"From:\nEnd Stone Protector,\nOld Dragon,\nProtector Dragon,\nSpecial Zealot,\nStrong Dragon,\nUnstable Dragon,\nWise Dragon,\nYoung Dragon:\n{pearlescentchance3}% or 1/{100/pearlescentchance3}\n\n"
+        f"From:\nSuperior Dragon:\n{pearlescentchance4}% or 1/{100/pearlescentchance4}\n")
 
 
 
@@ -1487,11 +1166,11 @@ peltchance5=(0.01*bucketmultiplier*vincentmultiplier)
 
 if dye=="pelt":
     print("\nChance for Pelt Dye:\n"
-        f"From a Trackable Animal:      {peltchance1}% or 1/{100//peltchance1+1}\n"
-        f"From an Untrackable Animal:   {peltchance2}% or 1/{100//peltchance2+1}\n"
-        f"From an Undetected Animal:    {peltchance3}% or 1/{100//peltchance3+1}\n"
-        f"From an Endangered Animal:    {peltchance4}% or 1/{100//peltchance4+1}\n"
-        f"From an Elusive Animal:       {peltchance5}% or 1/{100//peltchance5+1}\n")
+        f"From a Trackable Animal:      {peltchance1}% or 1/{100/peltchance1}\n"
+        f"From an Untrackable Animal:   {peltchance2}% or 1/{100/peltchance2}\n"
+        f"From an Undetected Animal:    {peltchance3}% or 1/{100/peltchance3}\n"
+        f"From an Endangered Animal:    {peltchance4}% or 1/{100/peltchance4}\n"
+        f"From an Elusive Animal:       {peltchance5}% or 1/{100/peltchance5}\n")
 
 
 
@@ -1504,11 +1183,11 @@ periwinklechance5=(0.001*bucketmultiplier*vincentmultiplier*lootingmultiplier*mf
 
 if dye=="periwinkle":
     print("\nChance for Periwinkle Dye:\n"
-        f"From Level 1-99 Runic Mobs:       {periwinklechance1}% or 1/{100//periwinklechance1+1}\n"
-        f"From Level 100-199 Runic Mobs:    {periwinklechance2}% or 1/{100//periwinklechance2+1}\n"
-        f"From Level 200-299 Runic Mobs:    {periwinklechance3}% or 1/{100//periwinklechance3+1}\n"
-        f"From Level 300-399 Runic Mobs:    {periwinklechance4}% or 1/{100//periwinklechance4+1}\n"
-        f"From level 400+ Runic Mobs:       {periwinklechance5}% or 1/{100//periwinklechance5+1}\n")
+        f"From Level 1-99 Runic Mobs:       {periwinklechance1}% or 1/{100/periwinklechance1}\n"
+        f"From Level 100-199 Runic Mobs:    {periwinklechance2}% or 1/{100/periwinklechance2}\n"
+        f"From Level 200-299 Runic Mobs:    {periwinklechance3}% or 1/{100/periwinklechance3}\n"
+        f"From Level 300-399 Runic Mobs:    {periwinklechance4}% or 1/{100/periwinklechance4}\n"
+        f"From level 400+ Runic Mobs:       {periwinklechance5}% or 1/{100/periwinklechance5}\n")
 
 
 
@@ -1521,11 +1200,11 @@ sangriachance5=(0.01*rngmultiplier*vincentmultiplier)
 
 if dye=="sangria":
     print("\nChance for Sangria Dye:\n"
-        f"From Tier 1 Riftstalker Bloodfiend: {sangriachance1}% or 1/{100//sangriachance1+1}\n"
-        f"From Tier 2 Riftstalker Bloodfiend: {sangriachance2}% or 1/{100//sangriachance2+1}\n"
-        f"From Toer 3 Riftstalker Bloodfiend: {sangriachance3}% or 1/{100//sangriachance3+1}\n"
-        f"From Tier 4 Riftstalker Bloodfiend: {sangriachance4}% or 1/{100//sangriachance4+1}\n"
-        f"From Tier 5 Riftstalker Bloodfiend: {sangriachance5}% or 1/{100//sangriachance5+1}\n")
+        f"From Tier 1 Riftstalker Bloodfiend: {sangriachance1}% or 1/{100/sangriachance1}\n"
+        f"From Tier 2 Riftstalker Bloodfiend: {sangriachance2}% or 1/{100/sangriachance2}\n"
+        f"From Toer 3 Riftstalker Bloodfiend: {sangriachance3}% or 1/{100/sangriachance3}\n"
+        f"From Tier 4 Riftstalker Bloodfiend: {sangriachance4}% or 1/{100/sangriachance4}\n"
+        f"From Tier 5 Riftstalker Bloodfiend: {sangriachance5}% or 1/{100/sangriachance5}\n")
 
 
 
@@ -1534,7 +1213,7 @@ secretchance=(0.0001*bucketmultiplier*vincentmultiplier)
 
 if dye=="secret":
     print("\nChance for Secret Dye:\n"
-        f"From Collecting a Secret: {secretchance}% or 1/{100//secretchance+1}\n")
+        f"From Collecting a Secret: {secretchance}% or 1/{100/secretchance}\n")
 
 
 
@@ -1547,11 +1226,11 @@ tentaclechance5=(0.005*bucketmultiplier*vincentmultiplier)
 
 if dye=="tentacle":
     print("\nChance for Tentacle Dye:\n"
-        f"From a Basic Tier Kuudra Loot Chest:      {tentaclechance1}% or 1/{100//tentaclechance1+1}\n"
-        f"From a Hot Tier Kuudra Loot Chest:        {tentaclechance2}% or 1/{100//tentaclechance2+1}\n"
-        f"From a Burning Tier Kuudra Loot Chest:    {tentaclechance3}% or 1/{100//tentaclechance3+1}\n"
-        f"From a Fiery Tier Kuudra Loot Chest:      {tentaclechance4}% or 1/{100//tentaclechance4+1}\n"
-        f"From an Infernal Tier Kuudra Loot Chest:  {tentaclechance5}% or 1/{100//tentaclechance5+1}\n")
+        f"From a Basic Tier Kuudra Loot Chest:      {tentaclechance1}% or 1/{100/tentaclechance1}\n"
+        f"From a Hot Tier Kuudra Loot Chest:        {tentaclechance2}% or 1/{100/tentaclechance2}\n"
+        f"From a Burning Tier Kuudra Loot Chest:    {tentaclechance3}% or 1/{100/tentaclechance3}\n"
+        f"From a Fiery Tier Kuudra Loot Chest:      {tentaclechance4}% or 1/{100/tentaclechance4}\n"
+        f"From an Infernal Tier Kuudra Loot Chest:  {tentaclechance5}% or 1/{100/tentaclechance5}\n")
 
 
 
@@ -1562,9 +1241,9 @@ treasurechance3=(0.01*bucketmultiplier*vincentmultiplier)
 
 if dye=="treasure":
     print("\nChance for Treasure Dye:\n"
-        f"From a Good Catch:            {treasurechance1}% or 1/{100//treasurechance1+1}\n"
-        f"From a Great Catch:           {treasurechance2}% or 1/{100//treasurechance2+1}\n"
-        f"From an Outstanding Catch:    {treasurechance3}% or 1/{100//treasurechance3+1}\n")
+        f"From a Good Catch:            {treasurechance1}% or 1/{100/treasurechance1}\n"
+        f"From a Great Catch:           {treasurechance2}% or 1/{100/treasurechance2}\n"
+        f"From an Outstanding Catch:    {treasurechance3}% or 1/{100/treasurechance3}\n")
 
 
 
@@ -1573,7 +1252,7 @@ wildstrawberrychance=(0.000000667*bucketmultiplier*vincentmultiplier)
 
 if dye=="wild strawberry":
     print("\nChance for Wild Strawberry Dye:\n"
-        f"From Harvesting a Crop: {wildstrawberrychance}% or 1/{100//wildstrawberrychance+1}\n")
+        f"From Harvesting a Crop: {wildstrawberrychance}% or 1/{100/wildstrawberrychance}\n")
 
 
 
