@@ -8,13 +8,13 @@
 
 #to do:
     #make rng meter functional
-    #test fossil dye optimizations!!! AQUA/CITRINE/ONYX MULTIPLIERS DON'T WORK FORT SOME REASON RAHHHHHH
     #add time estimates to all dyes maybe
     #look into exporting it as an exe file
     #functions!
     #add relevant attributes!
     #distribute thru different files to make finding things easier
-    #TURN IT INTO A WEBSITE (dyehunters.com)
+    #TURN IT INTO A WEBSITE (options: dyehunters.com, dyeblock.com), with GUI inspired by SkyShards
+    #pull vincent boost from API maybe
 
 
 
@@ -147,9 +147,20 @@ def testint(prompt):
             print("Invalid input!")
     return userinput
 
+#chisel shit
+chiselgemstone1=""
+chiselgemstonetier1=""
+chiselgemstone2=""
+chiselgemstonetier2=""
+chiselgemstone3=""
+chiselgemstonetier3=""
+aquamarinemultiplier=0
+citrinemultiplier=0
+onyxmultiplier=0
+
 #check gemstone slot 1 type
 def checkgemslot1type():
-    chiselgemstone1=""
+    global chiselgemstone1
 
     while True:
         chiselgemstone1=input("What type of Gemstone do you have in the 1st Gemstone Slot of your Chisel?: ")
@@ -166,10 +177,11 @@ def checkgemslot1type():
     
 #check gemstone slot 1 tier
 def checkgemslot1tier():
-    chiselgemstonetier1=""
-    aquamarinemultiplier=0
-    citrinemultiplier=0
-    onyxmultiplier=0
+    global chiselgemstone1
+    global chiselgemstonetier1
+    global aquamarinemultiplier
+    global citrinemultiplier
+    global onyxmultiplier
 
     while True:
         chiselgemstonetier1=input("What tier of Gemstone do you have in the 1st Gemstone Slot of your Chisel?: ")
@@ -230,8 +242,8 @@ def checkgemslot1tier():
 
 #check gemstone slot 2 type
 def checkgemslot2type():
-    chiselgemstone2=""
-    
+    global chiselgemstone2
+
     while True:
         chiselgemstone2=input("What type of Gemstone do you have in the 2nd Gemstone Slot of your Chisel?: ")
         chiselgemstone2=chiselgemstone2.lower()
@@ -247,10 +259,11 @@ def checkgemslot2type():
 
 #check gemstone slot 2 tier
 def checkgemslot2tier():
-    chiselgemstonetier2=""
-    aquamarinemultiplier=0
-    citrinemultiplier=0
-    onyxmultiplier=0
+    global chiselgemstone2
+    global chiselgemstonetier2
+    global aquamarinemultiplier
+    global citrinemultiplier
+    global onyxmultiplier
 
     while True:
         chiselgemstonetier2=input("What tier of Gemstone do you have in the 2nd Gemstone Slot of your Chisel?: ")
@@ -311,7 +324,7 @@ def checkgemslot2tier():
 
 #check gemstone slot 3 type
 def checkgemslot3type():
-    chiselgemstone3=""
+    global chiselgemstone3
 
     while True:
         chiselgemstone3=input("What type of Gemstone do you have in the 3rd Gemstone Slot of your Chisel?: ")
@@ -328,11 +341,12 @@ def checkgemslot3type():
 
 #check gemstone slot 3 tier
 def checkgemslot3tier():
-    chiselgemstonetier3=""
-    aquamarinemultiplier=0
-    citrinemultiplier=0
-    onyxmultiplier=0
-    
+    global chiselgemstone3
+    global chiselgemstonetier3
+    global aquamarinemultiplier
+    global citrinemultiplier
+    global onyxmultiplier
+
     while True:
         chiselgemstonetier3=input("What tier of Gemstone do you have in the 3rd Gemstone Slot of your Chisel?: ")
         chiselgemstonetier3=chiselgemstonetier3.lower()
@@ -730,8 +744,9 @@ if dye=="fossil":
 #print info
 print(f"\n\nSelected Dye: {dye}")
 if rngmeter=="yes":
-    print(f"Selected on RNG-Meter: {rngmeter}")
-    print(f"Amount of XP in RNG-Meter: {rngmeteramount}")
+    print(
+        f"Selected on RNG-Meter: {rngmeter}"
+        f"Amount of XP in RNG-Meter: {rngmeteramount}")
 print(f"Boosted by Vincent: {boost}")
 if boost=="yes":
     print(f"Boosted by: {vincentmultiplierinput}\n\n")
@@ -740,20 +755,23 @@ if dye in bucketofdyeList:
 if dye=="fossil":
     print(f"Chisel tier: {chisel}\n")
     if chisel=="reinforced" or chisel=="reinforced chisel" or chisel=="t2" or chisel=="2":
-        print(f"Gemstone type: {chiselgemstone1}")
-        print(f"Gemstone tier: {chiselgemstonetier1}\n")
+        print(
+            f"Gemstone type: {chiselgemstone1}"
+            f"Gemstone tier: {chiselgemstonetier1}\n")
     elif chisel=="glacite-plated" or chisel=="glacite plated" or chisel=="glacite-plated chisel" or chisel=="glacite plated chisel" or chisel=="t3" or chisel=="3":
-        print(f"1st slot Gemstone type: {chiselgemstone1}")
-        print(f"1st slot Gemstone tier: {chiselgemstonetier1}\n")
-        print(f"2nd slot Gemstone type: {chiselgemstone2}")
-        print(f"2nd slot Gemstone tier: {chiselgemstonetier2}\n")
+        print(
+            f"1st slot Gemstone type: {chiselgemstone1}"
+            f"1st slot Gemstone tier: {chiselgemstonetier1}\n"
+            f"2nd slot Gemstone type: {chiselgemstone2}"
+            f"2nd slot Gemstone tier: {chiselgemstonetier2}\n")
     elif chisel=="perfect" or chisel=="perfect chisel" or chisel=="t4" or chisel=="4":
-        print(f"1st slot Gemstone type: {chiselgemstone1}")
-        print(f"1st slot Gemstone tier: {chiselgemstonetier1}\n")
-        print(f"2nd slot Gemstone type: {chiselgemstone2}")
-        print(f"2nd slot Gemstone tier: {chiselgemstonetier2}\n")
-        print(f"3rd slot Gemstone type: {chiselgemstone3}")
-        print(f"3rd slot Gemstone tier: {chiselgemstonetier3}\n")
+        print(
+            f"1st slot Gemstone type: {chiselgemstone1}"
+            f"1st slot Gemstone tier: {chiselgemstonetier1}\n"
+            f"2nd slot Gemstone type: {chiselgemstone2}"
+            f"2nd slot Gemstone tier: {chiselgemstonetier2}\n"
+            f"3rd slot Gemstone type: {chiselgemstone3}"
+            f"3rd slot Gemstone tier: {chiselgemstonetier3}\n")
     print(f"Fungloom Attribute level: {fungloom}\n")
 if magicfindaffected==True:
     print(
@@ -975,7 +993,6 @@ if dye=="fossil":
     print("\nChance for Fossil Dye:\n"
         f"To replace any Treasure in Fossil Excavator:  {fossilchance}% or 1/{100/fossilchance}\n"
         f"To BE OBTAINED per scrap:                     {fossilchanceperscrap}% or 1/{100/fossilchanceperscrap}\n")
-    print(aquamarinemultiplier, citrinemultiplier, onyxmultiplier)
 
 
 
