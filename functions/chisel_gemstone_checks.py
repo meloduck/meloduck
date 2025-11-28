@@ -1,5 +1,7 @@
 #chisel gemstone checks
 
+#imports
+
 #defaults
 chiselgemstone1type=""
 chiselgemstone1tier=""
