@@ -15,6 +15,7 @@
     #TURN IT INTO A WEBSITE (options: dyehunters.com, dyeblock.com), with GUI inspired by SkyShards, made in TypeScript
     #pull vincent boost from API maybe
     #improve jade dye
+    #fix weird jade dye rng meter thingy (only affects 1 roll)
 
 
 
@@ -152,34 +153,34 @@ if farmingfortuneaffected==True:
 
     #input crop fortune and test for int, if not int return "Invalid input!" and try again
     #cactus
-    cactusfortune=test_int_cf.inputcf("Cactus")
+    cactusfortune=test_int_cf.testintcf("Cactus")
     
     #carrot
-    carrotfortune=test_int_cf.inputcf("Carrot")
+    carrotfortune=test_int_cf.testintcf("Carrot")
 
     #cocoabeans
-    cocoabeansfortune=test_int_cf.inputcf("Cocoa Beans")
+    cocoabeansfortune=test_int_cf.testintcf("Cocoa Beans")
 
     #melon
-    melonfortune=test_int_cf.inputcf("Melon")
+    melonfortune=test_int_cf.testintcf("Melon")
 
     #mushroom
-    mushroomfortune=test_int_cf.inputcf("Mushroom")
+    mushroomfortune=test_int_cf.testintcf("Mushroom")
 
     #nether wart
-    netherwartfortune=test_int_cf.inputcf("Nether Wart")
+    netherwartfortune=test_int_cf.testintcf("Nether Wart")
 
     #potato
-    potatofortune=test_int_cf.inputcf("Potato")
+    potatofortune=test_int_cf.testintcf("Potato")
 
     #pumpkin
-    pumpkinfortune=test_int_cf.inputcf("Pumpkin")
+    pumpkinfortune=test_int_cf.testintcf("Pumpkin")
 
     #sugar cane
-    sugarcanefortune=test_int_cf.inputcf("Sugar Cane")
+    sugarcanefortune=test_int_cf.testintcf("Sugar Cane")
 
     #wheat
-    wheatfortune=test_int_cf.inputcf("Wheat")
+    wheatfortune=test_int_cf.testintcf("Wheat")
 
 
 
@@ -602,6 +603,13 @@ if dye=="jade":
     print("\nChance for Jade Dye:\n"
         f"Per item roll in a Crystal Nucleus Bundle: {jadechance:f}% or 1/{100/jadechance}\n"
         f"Per Crystal Nucleus Run (for now assuming that you have all buffs for it): {jadechance*19.1:f}% or 1/{100/(jadechance*19.1)}")
+
+#brawly says: 
+#wiki says 18.5 rolls but that doesn't include shards, 
+#hideoncave has a 50% chance (5% per level) for one more roll so it's .5,
+#but cuboa shard buffs that shard by 20% (2% per level),
+#so it's like, 20% of 50% is 10 so u have 60% total,
+#that's where the 19.1 comes from
 
 
 
