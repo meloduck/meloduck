@@ -37,6 +37,8 @@ from lists import all_dyes_bucketofdye_list
 #input dye
 dye=input_dye.getdye()
 
+
+
 #is the dye affected by magic find (and looting)?
 magicfindaffected=test_affected_mf.testmfaffected()
 
@@ -47,6 +49,7 @@ farmingfortuneaffected=test_affected_ff.testffaffected()
 rngaffected=test_affected_rngmeter.testrngaffected()
 
 
+
 #input vincent boost
 #is dye boosted?
 vincentboosted=input_vincent_multiplier.inputvincentboosted()
@@ -55,23 +58,13 @@ vincentmultiplier=1
 if vincentboosted==True:
     vincentmultiplier=input_vincent_multiplier_amount.inputvincentmultiplier()
 
-
-
 #input bucket of dye
 bucketmultiplier=input_bucket_of_dye.input_bucket_of_dye()
 bucketofdye=input_bucket_of_dye.getbucketofdye()
 
-
-
 #input rng meter
 rngmeter=input_rngmeter.inputrngmeterselected()
 rngmeteramount=input_rngmeter.getrngmeteramount()
-
-rngmultiplier=1 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#turn rngmeteramount into float from 0.0-1.0
-#then the formula is: chance=base chance*(1+2*float)
-
-
 
 #input magic find
 magicfind=0
@@ -422,9 +415,9 @@ if dye=="byzantium":
 
 
 #carmine
-carminechance1=(0.00002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
-carminechance2=(0.00004*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
-carminechance3=(0.002*rngmultiplier*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+carminechance1=(0.00002*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+carminechance2=(0.00004*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+carminechance3=(0.002*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
 if dye=="carmine":
     print("\nChance for Carmine Dye:\n"
@@ -435,8 +428,8 @@ if dye=="carmine":
 
 
 #celadon
-celadonchance1=(0.001*rngmultiplier*vincentmultiplier)
-celadonchance2=(0.01*rngmultiplier*vincentmultiplier)
+celadonchance1=(0.001*vincentmultiplier)
+celadonchance2=(0.01*vincentmultiplier)
 
 if dye=="celadon":
     print("\nChance for Celadon Dye:\n"
@@ -607,7 +600,8 @@ jadechance=(0.0002*(1+2*(rngmeteramount/5000000))*bucketmultiplier*vincentmultip
 
 if dye=="jade":
     print("\nChance for Jade Dye:\n"
-        f"Per item roll in a Crystal Nucleus Bundle: {jadechance:f}% or 1/{100/jadechance}\n")
+        f"Per item roll in a Crystal Nucleus Bundle: {jadechance:f}% or 1/{100/jadechance}\n"
+        f"Per Crystal Nucleus Run (for now assuming that you have all buffs for it): {jadechance*19.1:f}% or 1/{100/(jadechance*19.1)}")
 
 
 
