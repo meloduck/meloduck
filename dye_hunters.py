@@ -16,6 +16,7 @@
     #pull vincent boost from API maybe
     #improve jade dye
     #fix weird jade dye rng meter thingy (only affects 1 roll)
+    #fix prints maybe
 
 
 
@@ -30,6 +31,10 @@ from functions import test_affected_mf
 from functions import test_affected_rngmeter
 from functions import test_int_cf
 from functions import input_ff
+from functions import input_legion
+from functions import input_legion_amount
+from functions import input_looting
+from functions import input_mf
 from functions import input_rngmeter
 from lists import all_dyes_bucketofdye_list
 
@@ -39,8 +44,8 @@ from lists import all_dyes_bucketofdye_list
 dye=input_dye.getdye()
 
 
-
-#is the dye affected by magic find (and looting)?
+#test if affected
+#is the dye affected by magic find (and looting)
 magicfindaffected=test_affected_mf.testmfaffected()
 
 #is the dye affected by farming fortune?
@@ -68,68 +73,18 @@ rngmeter=input_rngmeter.inputrngmeterselected()
 rngmeteramount=input_rngmeter.getrngmeteramount()
 
 #input magic find
-magicfind=0
-legionlevel=0
-legionamount=0
-lootinglevel=0
-if magicfindaffected==True:
-    while True:
-        magicfind=input("How much Magic Find do you have?: ")
-        try:
-            magicfind=int(magicfind)
-        except:
-            print("Invalid input!")
-        if magicfind>=0:
-            break
-        elif magicfind<0:
-            print("You can't have negative Magic Find!")
+magicfind=input_mf.inputmf()
 
-    #input legion level
-    while True:
-        legionlevel=input("What level of Legion do you have?: ")
-        try:
-            legionlevel=int(legionlevel)
-        except:
-            print("Invalid input")
-        if legionlevel>=0:
-            break
-        elif legionlevel<0:
-            print("You can't have a negative level of Legion!")
-        elif legionlevel>20:
-            print("You can't have a Legion level higher than 20!")
+#input legion level
+legionlevel=input_legion.inputlegion()
 
-    #input amount of people close 
-    if legionlevel>0:
-        while True:
-            legionamount=input("How many people are close to you?: ")
-            try:
-                legionamount=int(legionamount)
-            except:
-                print("Invalid Input")
-            if legionamount>=0:
-                break
-            elif legionamount<0:
-                print("There can't be negative people close to you!")
-            elif legionamount>20:
-                legionamount=20 
-                break
+#input amount of people close 
+legionamount=input_legion_amount.inputlegionamount(legionlevel)
 
-
-    #input looting level
-    while True:
-        lootinglevel=input("What level of Looting do you have?: ")
-        try:
-            lootinglevel=int(lootinglevel)
-        except:
-            print("Invalid input!")
-        if lootinglevel>=0:
-            break
-        elif lootinglevel<0:
-            print("You can't have a negative level of Looting!")
-        elif lootinglevel>5:
-            print("You can't have a Looting level higher than 5!")
-
+#input looting level
+lootinglevel=input_looting.inputlooting()
 lootingmultiplier=(1+lootinglevel*0.15)
+
 magicfind=(magicfind*(0.007*legionamount*legionlevel))
 mfmultiplier=(1+magicfind/100)
 
@@ -584,15 +539,15 @@ if dye=="holly":
 
 
 #iceberg
-icerbergchance1=(0.0001*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
-icerbergchance2=(0.0002*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
-icerbergchance3=(0.002*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+icebergchance1=(0.0001*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+icebergchance2=(0.0002*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
+icebergchance3=(0.002*bucketmultiplier*vincentmultiplier*lootingmultiplier*mfmultiplier)
 
-if dye=="icerberg":
-    print("\nChance for Icerberg Dye:\n\n"
-        f"From:\nFrosty,\nFrozen Steve:\n{icerbergchance1:f}% or 1/{100/icerbergchance1}\n\n"
-        f"From:\nNutcracker:\n{icerbergchance2:f}% or 1/{100/icerbergchance2}\n\n"
-        f"From:\nYeti:{icerbergchance3:f}% or 1/{100/icerbergchance3}\n")
+if dye=="iceberg":
+    print("\nChance for iceberg Dye:\n\n"
+        f"From:\nFrosty,\nFrozen Steve:\n{icebergchance1:f}% or 1/{100/icebergchance1}\n\n"
+        f"From:\nNutcracker:\n{icebergchance2:f}% or 1/{100/icebergchance2}\n\n"
+        f"From:\nYeti:{icebergchance3:f}% or 1/{100/icebergchance3}\n")
 
 
 
